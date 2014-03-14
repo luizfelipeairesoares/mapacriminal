@@ -16,6 +16,12 @@
 		D6AA8E1B18D1DC09006C1F1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6AA8E1918D1DC09006C1F1A /* Main.storyboard */; };
 		D6AA8E2018D1DC09006C1F1A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6AA8E1F18D1DC09006C1F1A /* Images.xcassets */; };
 		D6AA8E3D18D1DC47006C1F1A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA8E3C18D1DC47006C1F1A /* MapKit.framework */; };
+		D6D196A218D3331000DE897F /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D196A118D3331000DE897F /* libsqlite3.0.dylib */; };
+		D6D196A418D3343000DE897F /* criminal_map.db in Resources */ = {isa = PBXBuildFile; fileRef = D6D196A318D3343000DE897F /* criminal_map.db */; };
+		D6D196A818D3382F00DE897F /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D196A718D3382F00DE897F /* Location.m */; };
+		D6D196AB18D338F100DE897F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D196AA18D338F100DE897F /* User.m */; };
+		D6D196B518D3455F00DE897F /* LocationOps.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D196B418D3455F00DE897F /* LocationOps.m */; };
+		D6D196B818D3457200DE897F /* UserOps.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D196B718D3457200DE897F /* UserOps.m */; };
 		D6E4490518D1E0910020D8F5 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E4490418D1E0910020D8F5 /* MapViewController.m */; };
 		D6E4490818D1E9BA0020D8F5 /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E4490718D1E9BA0020D8F5 /* LocationViewController.m */; };
 		D6E4490C18D246F50020D8F5 /* PlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E4490B18D246F50020D8F5 /* PlacesViewController.m */; };
@@ -40,6 +46,17 @@
 		D6AA8E3018D1DC09006C1F1A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D6AA8E3218D1DC09006C1F1A /* criminalmapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = criminalmapTests.m; sourceTree = "<group>"; };
 		D6AA8E3C18D1DC47006C1F1A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D6D196A118D3331000DE897F /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		D6D196A318D3343000DE897F /* criminal_map.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = criminal_map.db; sourceTree = "<group>"; };
+		D6D196A618D3382F00DE897F /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = Objects/Location.h; sourceTree = "<group>"; };
+		D6D196A718D3382F00DE897F /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = Objects/Location.m; sourceTree = "<group>"; };
+		D6D196A918D338F100DE897F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Objects/User.h; sourceTree = "<group>"; };
+		D6D196AA18D338F100DE897F /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Objects/User.m; sourceTree = "<group>"; };
+		D6D196B318D3455F00DE897F /* LocationOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationOps.h; path = DBOps/LocationOps.h; sourceTree = "<group>"; };
+		D6D196B418D3455F00DE897F /* LocationOps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationOps.m; path = DBOps/LocationOps.m; sourceTree = "<group>"; };
+		D6D196B618D3457200DE897F /* UserOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserOps.h; path = DBOps/UserOps.h; sourceTree = "<group>"; };
+		D6D196B718D3457200DE897F /* UserOps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserOps.m; path = DBOps/UserOps.m; sourceTree = "<group>"; };
+		D6D196B918D3807500DE897F /* Const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
 		D6E4490318D1E0910020D8F5 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewController.h; path = ViewControllers/MapViewController.h; sourceTree = "<group>"; };
 		D6E4490418D1E0910020D8F5 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = ViewControllers/MapViewController.m; sourceTree = "<group>"; };
 		D6E4490618D1E9BA0020D8F5 /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationViewController.h; path = ViewControllers/LocationViewController.h; sourceTree = "<group>"; };
@@ -55,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6D196A218D3331000DE897F /* libsqlite3.0.dylib in Frameworks */,
 				D6AA8E0A18D1DC08006C1F1A /* CoreGraphics.framework in Frameworks */,
 				D6AA8E0C18D1DC08006C1F1A /* UIKit.framework in Frameworks */,
 				D6AA8E3D18D1DC47006C1F1A /* MapKit.framework in Frameworks */,
@@ -86,6 +104,7 @@
 		D6AA8E0618D1DC08006C1F1A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D6D196A118D3331000DE897F /* libsqlite3.0.dylib */,
 				D6AA8E3C18D1DC47006C1F1A /* MapKit.framework */,
 				D6AA8E0718D1DC08006C1F1A /* Foundation.framework */,
 				D6AA8E0918D1DC08006C1F1A /* CoreGraphics.framework */,
@@ -98,6 +117,8 @@
 		D6AA8E0D18D1DC08006C1F1A /* criminalmap */ = {
 			isa = PBXGroup;
 			children = (
+				D6D196AC18D339AF00DE897F /* DBOps */,
+				D6D196A518D337CE00DE897F /* Objects */,
 				D6E4490D18D249930020D8F5 /* CustomCell */,
 				D6E4490918D1EB7B0020D8F5 /* Storyboard */,
 				D6AA8E1618D1DC08006C1F1A /* AppDelegate.h */,
@@ -117,10 +138,13 @@
 		D6AA8E0E18D1DC08006C1F1A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D6D196A018D3325A00DE897F /* libs */,
+				D6D196A318D3343000DE897F /* criminal_map.db */,
 				D6AA8E0F18D1DC08006C1F1A /* criminalmap-Info.plist */,
 				D6AA8E1018D1DC08006C1F1A /* InfoPlist.strings */,
 				D6AA8E1318D1DC08006C1F1A /* main.m */,
 				D6AA8E1518D1DC08006C1F1A /* criminalmap-Prefix.pch */,
+				D6D196B918D3807500DE897F /* Const.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -141,6 +165,35 @@
 				D6AA8E2F18D1DC09006C1F1A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D6D196A018D3325A00DE897F /* libs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = libs;
+			sourceTree = "<group>";
+		};
+		D6D196A518D337CE00DE897F /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				D6D196A618D3382F00DE897F /* Location.h */,
+				D6D196A718D3382F00DE897F /* Location.m */,
+				D6D196A918D338F100DE897F /* User.h */,
+				D6D196AA18D338F100DE897F /* User.m */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+		D6D196AC18D339AF00DE897F /* DBOps */ = {
+			isa = PBXGroup;
+			children = (
+				D6D196B318D3455F00DE897F /* LocationOps.h */,
+				D6D196B418D3455F00DE897F /* LocationOps.m */,
+				D6D196B618D3457200DE897F /* UserOps.h */,
+				D6D196B718D3457200DE897F /* UserOps.m */,
+			);
+			name = DBOps;
 			sourceTree = "<group>";
 		};
 		D6E4490918D1EB7B0020D8F5 /* Storyboard */ = {
@@ -223,6 +276,7 @@
 				D6AA8E2018D1DC09006C1F1A /* Images.xcassets in Resources */,
 				D6AA8E1218D1DC08006C1F1A /* InfoPlist.strings in Resources */,
 				D6AA8E1B18D1DC09006C1F1A /* Main.storyboard in Resources */,
+				D6D196A418D3343000DE897F /* criminal_map.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,7 +287,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6D196B518D3455F00DE897F /* LocationOps.m in Sources */,
+				D6D196B818D3457200DE897F /* UserOps.m in Sources */,
+				D6D196AB18D338F100DE897F /* User.m in Sources */,
 				D6E4490518D1E0910020D8F5 /* MapViewController.m in Sources */,
+				D6D196A818D3382F00DE897F /* Location.m in Sources */,
 				D6AA8E1818D1DC08006C1F1A /* AppDelegate.m in Sources */,
 				D6AA8E1418D1DC08006C1F1A /* main.m in Sources */,
 				D6E4490818D1E9BA0020D8F5 /* LocationViewController.m in Sources */,

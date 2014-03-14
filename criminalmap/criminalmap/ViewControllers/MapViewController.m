@@ -74,6 +74,9 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(appDelegate.locManager.location.coordinate, 100, 100);
     [map setRegion:region];
+
+    //TODO: Add Hud
+    
     [appDelegate.geocoder reverseGeocodeLocation:appDelegate.locManager.location completionHandler:^(NSArray *placemarks, NSError *error) {
         if (error == nil) {
             CLPlacemark *place = [placemarks objectAtIndex:0];

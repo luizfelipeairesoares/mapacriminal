@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LocationOps.h"
 
 @interface PlacesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
     IBOutlet UITableView *table;
+    NSArray *allLocations;
 }
 
 @end

@@ -16,6 +16,29 @@
     // Override point for customization after application launch.
     self.locManager = [[CLLocationManager alloc] init];
     self.geocoder = [[CLGeocoder alloc] init];
+    
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    
+    NSString *databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"criminal_map.db"]];
+    
+    NSFileManager *filemgr = [NSFileManager defaultManager];
+    if ([filemgr fileExistsAtPath: databasePath ] == YES) {
+		const char *dbpath = [databasePath UTF8String];
+        if (sqlite3_open(dbpath, &db) == SQLITE_OK) {
+            NSLog(@"DB OPENED SUCCESSFULLY!");
+//            char *errMsg;
+//            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS CONTACTS (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, ADDRESS TEXT, PHONE TEXT)";
+//            if (sqlite3_exec(db, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
+//                status.text = @"Failed to create table";
+//            }
+//            sqlite3_close(db);
+        } else {
+            NSLog(@"DB DIDN'T OPEN!");
+//            status.text = @"Failed to open/create database";
+        }
+    }
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MapViewController *mapView = [storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mapView];
