@@ -44,6 +44,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (self.currentLocation != nil) {
+        [self.txtName setText:self.currentLocation.locationName];
         [self.lblLatitude setText:[NSString stringWithFormat:@"%f", self.currentLocation.locationLat]];
         [self.lblLongitude setText:[NSString stringWithFormat:@"%f", self.currentLocation.locationLng]];
     } else {
@@ -93,10 +94,7 @@
         loc.locationName = self.txtName.text;
         loc.locationLat = [self.lblLatitude.text doubleValue];
         loc.locationLng = [self.lblLongitude.text doubleValue];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MM/dd/yyyy HH:mm"];
-        NSDate *dt = [dateFormatter dateFromString:self.txtDate.text];
-        loc.locationDtCreated = dt;
+        loc.locationDtCreated = selectedDate;
         if (self.txtObs.text != nil && ![self.txtObs.text isEqualToString:@""]) {
             loc.locationText = self.txtObs.text;
         }
@@ -104,7 +102,9 @@
         [locOps saveData:loc completion:^(BOOL success, NSError *error) {
             if (success) {
                 [[[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Local salvo com sucesso" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+                [self.navigationController popViewControllerAnimated:YES];
             } else {
+                [[[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Ocorreu um erro ao salvar o local. Por favor, tente novamente" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
                 NSLog(@"%@", error);
             }
         }];
@@ -153,32 +153,35 @@
 #pragma mark - PickerView Delegate
 
 - (void)showDatePicker {
-    CGRect toolbarTargetFrame = CGRectMake(0, self.view.bounds.size.height-216-44, 320, 44);
-    CGRect datePickerTargetFrame = CGRectMake(0, self.view.bounds.size.height-216, 320, 216);
-    
-    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, 44)];
-    toolbar.tag = 9;
-    toolbar.barStyle = UIBarStyleDefault;
-    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissDatePicker:)];
-    [toolbar setItems:[NSArray arrayWithObjects:spacer, doneButton, nil]];
-    [self.view addSubview:toolbar];
-
-    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height+44, 320, 216)];
-    datePicker.tag = 10;
-    [datePicker addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:datePicker];
-    
-    [UIView beginAnimations:@"SlideIn" context:nil];
-    toolbar.frame = toolbarTargetFrame;
-    datePicker.frame = datePickerTargetFrame;
-    [self.btnSalvar setHidden:TRUE];
-    [images setHidden:TRUE];
-    [noImages setHidden:TRUE];
-    [btnAddPhoto setHidden:TRUE];
-    [UIView commitAnimations];
-    if ([self.txtDate.text isEqualToString:@""]) {
-        [self changeDate:datePicker];
+    if (!pickerIsShown) {
+        CGRect toolbarTargetFrame = CGRectMake(0, self.view.bounds.size.height-216-44, 320, 44);
+        CGRect datePickerTargetFrame = CGRectMake(0, self.view.bounds.size.height-216, 320, 216);
+        
+        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, 44)];
+        toolbar.tag = 9;
+        toolbar.barStyle = UIBarStyleDefault;
+        UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissDatePicker:)];
+        [toolbar setItems:[NSArray arrayWithObjects:spacer, doneButton, nil]];
+        [self.view addSubview:toolbar];
+        
+        UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height+44, 320, 216)];
+        datePicker.tag = 10;
+        [datePicker addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview:datePicker];
+        
+        [UIView beginAnimations:@"SlideIn" context:nil];
+        toolbar.frame = toolbarTargetFrame;
+        datePicker.frame = datePickerTargetFrame;
+        [self.btnSalvar setHidden:TRUE];
+        [images setHidden:TRUE];
+        [noImages setHidden:TRUE];
+        [btnAddPhoto setHidden:TRUE];
+        pickerIsShown = TRUE;
+        [UIView commitAnimations];
+        if ([self.txtDate.text isEqualToString:@""]) {
+            [self changeDate:datePicker];
+        }
     }
 }
 
@@ -195,6 +198,7 @@
     [images setHidden:FALSE];
     [noImages setHidden:FALSE];
     [btnAddPhoto setHidden:FALSE];
+    pickerIsShown = FALSE;
     [UIView commitAnimations];
 }
 
@@ -204,7 +208,11 @@
 }
 
 - (void)changeDate:(UIDatePicker *)sender {
-    [self.txtDate setText:[NSDateFormatter localizedStringFromDate:sender.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle]];
+    [self.txtDate setText:[NSDateFormatter localizedStringFromDate:sender.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterMediumStyle]];
+    if (selectedDate == nil) {
+        selectedDate = [[NSDate alloc] init];
+    }
+    selectedDate = sender.date;
 }
 
 #pragma mark - UIImagePickerControllerDelegate

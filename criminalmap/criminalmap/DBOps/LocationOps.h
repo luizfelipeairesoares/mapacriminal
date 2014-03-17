@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
 #import "Location.h"
+#import "AppDelegate.h"
 
 @interface LocationOps : NSObject {
     sqlite3 *db;

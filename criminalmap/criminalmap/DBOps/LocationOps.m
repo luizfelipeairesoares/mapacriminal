@@ -11,14 +11,15 @@
 @implementation LocationOps
 
 - (NSArray *)selectAllLocations {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSMutableArray *locations;
     @try {
         NSFileManager *fileMgr = [NSFileManager defaultManager];
-        NSString *dbPath = [[[NSBundle mainBundle] resourcePath ]stringByAppendingPathComponent:@"criminal_map.db"];
-        BOOL success = [fileMgr fileExistsAtPath:dbPath];
+        BOOL success = [fileMgr fileExistsAtPath:appDelegate.dbPath];
         if (success) {
-            if(!(sqlite3_open([dbPath UTF8String], &db) == SQLITE_OK)) {
+            if(!(sqlite3_open([appDelegate.dbPath UTF8String], &db) == SQLITE_OK)) {
                 NSLog(@"Erro ao abrir o banco.");
+                return nil;
             }
             NSString *sql = @"SELECT * FROM LOCATIONS";
             sqlite3_stmt *sqlStatement;
@@ -35,9 +36,9 @@
                     char *locImg3 = (char *)sqlite3_column_text(sqlStatement, 5);
                     char *locLat = (char *)sqlite3_column_text(sqlStatement, 6);
                     char *locLng = (char *)sqlite3_column_text(sqlStatement, 7);
-                    char *locTxt = (char *)sqlite3_column_text(sqlStatement, 8);
+                    char *locName = (char *)sqlite3_column_text(sqlStatement, 8);
                     int userId = sqlite3_column_int(sqlStatement, 9);
-                    char *locName = (char *)sqlite3_column_text(sqlStatement, 10);
+                    char *locTxt = (char *)sqlite3_column_text(sqlStatement, 10);
                     
                     Location *loc = [[Location alloc] init];
                     NSString *strDate = [NSString stringWithUTF8String:dateCreated];
@@ -82,17 +83,18 @@
 
 - (void)saveData:(Location *)location completion:(void (^)(BOOL success, NSError *error))completion {
     @try {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         NSFileManager *fileMgr = [NSFileManager defaultManager];
-        NSString *dbPath = [[[NSBundle mainBundle] resourcePath ]stringByAppendingPathComponent:@"criminal_map.db"];
-        BOOL success = [fileMgr fileExistsAtPath:dbPath];
+        BOOL success = [fileMgr fileExistsAtPath:appDelegate.dbPath];
         if (success) {
-            if(!(sqlite3_open([dbPath UTF8String], &db) == SQLITE_OK)) {
+            if(!(sqlite3_open([appDelegate.dbPath UTF8String], &db) == SQLITE_OK)) {
                 NSLog(@"Erro ao abrir o banco.");
+                return;
             }
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
             NSString *formattedDate = [dateFormatter stringFromDate:location.locationDtCreated];
-            NSString *sql = [NSString stringWithFormat:@"INSERT INTO LOCATIONS(location_name, location_lat, location_lng, location_dt_criacao) VALUES (%@, %f, %f, %@)", location.locationName, location.locationLat, location.locationLng, formattedDate];
+            NSString *sql = [NSString stringWithFormat:@"INSERT INTO LOCATIONS(location_name, location_lat, location_lng, location_dt_criacao, user_id) VALUES (\"%@\", %f, %f, \"%@\", %d)", location.locationName, location.locationLat, location.locationLng, formattedDate, 1];
             sqlite3_stmt *sqlStatement;
             if(sqlite3_prepare_v2(db, [sql UTF8String], -1, &sqlStatement, nil) != SQLITE_OK) {
                 NSLog(@"Erro com o statement");
@@ -103,6 +105,8 @@
                     completion(false, nil);
                 }
             }
+            sqlite3_finalize(sqlStatement);
+            sqlite3_close(db);
         }
     }
     @catch(NSException *exception) {

@@ -81,7 +81,7 @@
         if (error == nil) {
             CLPlacemark *place = [placemarks objectAtIndex:0];
             NSDictionary *address = [place addressDictionary];
-            [lblLocalAprox setText:[NSString stringWithFormat:@"%@, %@, %@, %@", [[address objectForKey:@"FormattedAddressLines"] objectAtIndex:0], [[address objectForKey:@"FormattedAddressLines"] objectAtIndex:1], [[address objectForKey:@"FormattedAddressLines"] objectAtIndex:2], [[address objectForKey:@"FormattedAddressLines"] objectAtIndex:3]]];
+            [lblLocalAprox setText:[NSString stringWithFormat:@"%@, %@, %@, %@", [address objectForKey:@"Street"], [address objectForKey:@"SubLocality"] != nil ? [address objectForKey:@"SubLocality"] : @"", [address objectForKey:@"SubAdministrativeArea"] != nil ? [address objectForKey:@"SubAdministrativeArea"] : @"", [address objectForKey:@"City"]]];
             [btnCadastrar setHidden:FALSE];
         }
     }];

@@ -24,6 +24,9 @@
     IBOutlet UIImageView *img2;
     IBOutlet UIImageView *img3;
     IBOutlet UIButton *btnAddPhoto;
+    
+    NSDate *selectedDate;
+    BOOL pickerIsShown;
 }
 
 @property(strong, nonatomic) IBOutlet UITextField *txtName;
