@@ -18,5 +18,6 @@
 @property(strong, nonatomic) NSDate *userDtCreated;
 @property(strong, nonatomic) NSDate *userDtModified;
 @property(nonatomic) int userPoliceId;
+@property(strong, nonatomic) NSString *userPassword;
 
 @end

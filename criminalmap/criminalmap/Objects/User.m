@@ -8,14 +8,6 @@
 
 #import "User.h"
 
-@implementation User {
-    int userId;
-    NSString *userFullName;
-    NSString *userNick;
-    NSString *userPass;
-    NSDate *userDtCreated;
-    NSDate *userDtModified;
-    int userPoliceId;
-}
+@implementation User
 
 @end

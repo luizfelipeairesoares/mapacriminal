@@ -16,8 +16,9 @@
 }
 
 - (NSArray *)selectAllUsers;
-- (void)saveData:(User *) user;
+- (void)saveData:(User *) user completion:(void(^)(BOOL success, NSError *error))completionBlock;
 - (void)updateData:(User *) user;
 - (void)deleteData:(User *) user;
+- (User *)selectUser:(NSString *)userLogin pass:(NSString *)userPass;
 
 @end

@@ -110,7 +110,7 @@
         }
     }
     @catch(NSException *exception) {
-        
+        NSLog(@"%@", [exception reason]);
     }
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "MapViewController.h"
+#import "LoginViewController.h"
 
 @implementation AppDelegate
 
@@ -20,9 +20,8 @@
     [self checkDB];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    MapViewController *mapView = [storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mapView];
-    [self.window setRootViewController:navController];
+    LoginViewController *loginView = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    [self.window setRootViewController:loginView];
     [self.window makeKeyAndVisible];
     return YES;
 }

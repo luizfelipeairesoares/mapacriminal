@@ -16,6 +16,8 @@
 		D6AA8E1B18D1DC09006C1F1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6AA8E1918D1DC09006C1F1A /* Main.storyboard */; };
 		D6AA8E2018D1DC09006C1F1A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6AA8E1F18D1DC09006C1F1A /* Images.xcassets */; };
 		D6AA8E3D18D1DC47006C1F1A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA8E3C18D1DC47006C1F1A /* MapKit.framework */; };
+		D6BAB80918D87C57004D79D5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6BAB80818D87C57004D79D5 /* LoginViewController.m */; };
+		D6BAB80C18D889F0004D79D5 /* NewUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6BAB80B18D889F0004D79D5 /* NewUserViewController.m */; };
 		D6D196A218D3331000DE897F /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D196A118D3331000DE897F /* libsqlite3.0.dylib */; };
 		D6D196A418D3343000DE897F /* criminal_map.db in Resources */ = {isa = PBXBuildFile; fileRef = D6D196A318D3343000DE897F /* criminal_map.db */; };
 		D6D196A818D3382F00DE897F /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D196A718D3382F00DE897F /* Location.m */; };
@@ -46,6 +48,10 @@
 		D6AA8E3018D1DC09006C1F1A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D6AA8E3218D1DC09006C1F1A /* criminalmapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = criminalmapTests.m; sourceTree = "<group>"; };
 		D6AA8E3C18D1DC47006C1F1A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D6BAB80718D87C57004D79D5 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ViewControllers/LoginViewController.h; sourceTree = "<group>"; };
+		D6BAB80818D87C57004D79D5 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ViewControllers/LoginViewController.m; sourceTree = "<group>"; };
+		D6BAB80A18D889F0004D79D5 /* NewUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewUserViewController.h; path = ViewControllers/NewUserViewController.h; sourceTree = "<group>"; };
+		D6BAB80B18D889F0004D79D5 /* NewUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewUserViewController.m; path = ViewControllers/NewUserViewController.m; sourceTree = "<group>"; };
 		D6D196A118D3331000DE897F /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		D6D196A318D3343000DE897F /* criminal_map.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = criminal_map.db; sourceTree = "<group>"; };
 		D6D196A618D3382F00DE897F /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = Objects/Location.h; sourceTree = "<group>"; };
@@ -129,6 +135,10 @@
 				D6E4490718D1E9BA0020D8F5 /* LocationViewController.m */,
 				D6E4490A18D246F50020D8F5 /* PlacesViewController.h */,
 				D6E4490B18D246F50020D8F5 /* PlacesViewController.m */,
+				D6BAB80718D87C57004D79D5 /* LoginViewController.h */,
+				D6BAB80818D87C57004D79D5 /* LoginViewController.m */,
+				D6BAB80A18D889F0004D79D5 /* NewUserViewController.h */,
+				D6BAB80B18D889F0004D79D5 /* NewUserViewController.m */,
 				D6AA8E1F18D1DC09006C1F1A /* Images.xcassets */,
 				D6AA8E0E18D1DC08006C1F1A /* Supporting Files */,
 			);
@@ -296,6 +306,8 @@
 				D6AA8E1418D1DC08006C1F1A /* main.m in Sources */,
 				D6E4490818D1E9BA0020D8F5 /* LocationViewController.m in Sources */,
 				D6E4490C18D246F50020D8F5 /* PlacesViewController.m in Sources */,
+				D6BAB80918D87C57004D79D5 /* LoginViewController.m in Sources */,
+				D6BAB80C18D889F0004D79D5 /* NewUserViewController.m in Sources */,
 				D6E4491018D249DF0020D8F5 /* PlacesCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
