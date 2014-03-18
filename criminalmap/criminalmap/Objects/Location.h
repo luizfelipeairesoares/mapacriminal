@@ -17,9 +17,6 @@
 @property(strong, nonatomic) NSString *locationText;
 @property(nonatomic) double locationLat;
 @property(nonatomic) double locationLng;
-@property(strong, nonatomic) NSString *locationImg1;
-@property(strong, nonatomic) NSString *locationImg2;
-@property(strong, nonatomic) NSString *locationImg3;
 @property(nonatomic) int userId;
 @property(strong, nonatomic) NSDate *locationDtCreated;
 @property(strong, nonatomic) NSDate *locationDtModified;

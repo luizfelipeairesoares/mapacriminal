@@ -31,9 +31,6 @@
                     char *dateCreated = (char *)sqlite3_column_text(sqlStatement, 0);
                     char *dateModified = (char *)sqlite3_column_text(sqlStatement, 1);
                     int uniqueId = sqlite3_column_int(sqlStatement, 2);
-                    char *locImg1 = (char *)sqlite3_column_text(sqlStatement, 3);
-                    char *locImg2 = (char *)sqlite3_column_text(sqlStatement, 4);
-                    char *locImg3 = (char *)sqlite3_column_text(sqlStatement, 5);
                     char *locLat = (char *)sqlite3_column_text(sqlStatement, 6);
                     char *locLng = (char *)sqlite3_column_text(sqlStatement, 7);
                     char *locName = (char *)sqlite3_column_text(sqlStatement, 8);
@@ -50,15 +47,6 @@
                         loc.locationDtModified = [dateFormatter dateFromString:strModified];
                     }
                     loc.locationId = uniqueId;
-                    if (locImg1 != nil) {
-                        
-                    }
-                    if (locImg2 != nil) {
-                        
-                    }
-                    if (locImg3 != nil) {
-                        
-                    }
                     loc.locationLat = [[NSString stringWithUTF8String:locLat] doubleValue];
                     loc.locationLng = [[NSString stringWithUTF8String:locLng] doubleValue];
                     if (locTxt != nil) {
@@ -78,6 +66,65 @@
     }
     @finally {
         return locations;
+    }
+}
+
+- (NSArray *)selectLocation:(Location *)location {
+    NSMutableArray *selectedLocations = nil;
+    @try {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        NSFileManager *fileMgr = [NSFileManager defaultManager];
+        BOOL success = [fileMgr fileExistsAtPath:appDelegate.dbPath];
+        if (success) {
+            if(!(sqlite3_open([appDelegate.dbPath UTF8String], &db) == SQLITE_OK)) {
+                NSLog(@"Erro ao abrir o banco.");
+                return nil;
+            }
+            NSString *sql = [NSString stringWithFormat:@"SELECT * FROM LOCATIONS where user_id = %d and location_lat = %f and location_lng = %f and location_name = \"%@\"", location.userId, location.locationLat, location.locationLng, location.locationName];
+            sqlite3_stmt *sqlStatement;
+            if(sqlite3_prepare_v2(db, [sql UTF8String], -1, &sqlStatement, nil) != SQLITE_OK) {
+                NSLog(@"Erro com o statement");
+            } else {
+                selectedLocations = [[NSMutableArray alloc] init];
+                while (sqlite3_step(sqlStatement) == SQLITE_ROW) {
+                    char *dateCreated = (char *)sqlite3_column_text(sqlStatement, 0);
+                    char *dateModified = (char *)sqlite3_column_text(sqlStatement, 1);
+                    int uniqueId = sqlite3_column_int(sqlStatement, 2);
+                    char *locLat = (char *)sqlite3_column_text(sqlStatement, 6);
+                    char *locLng = (char *)sqlite3_column_text(sqlStatement, 7);
+                    char *locName = (char *)sqlite3_column_text(sqlStatement, 8);
+                    int userId = sqlite3_column_int(sqlStatement, 9);
+                    char *locTxt = (char *)sqlite3_column_text(sqlStatement, 10);
+                    
+                    Location *loc = [[Location alloc] init];
+                    NSString *strDate = [NSString stringWithUTF8String:dateCreated];
+                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+                    loc.locationDtCreated = [dateFormatter dateFromString:strDate];
+                    if (dateModified != nil) {
+                        NSString *strModified = [NSString stringWithUTF8String:dateModified];
+                        loc.locationDtModified = [dateFormatter dateFromString:strModified];
+                    }
+                    loc.locationId = uniqueId;
+                    loc.locationLat = [[NSString stringWithUTF8String:locLat] doubleValue];
+                    loc.locationLng = [[NSString stringWithUTF8String:locLng] doubleValue];
+                    if (locTxt != nil) {
+                        loc.locationText = [NSString stringWithUTF8String:locTxt];
+                    }
+                    loc.userId = userId;
+                    loc.locationName = [NSString stringWithUTF8String:locName];
+                    [selectedLocations addObject:loc];
+                }
+                sqlite3_finalize(sqlStatement);
+                sqlite3_close(db);
+            }
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@", [exception reason]);
+    }
+    @finally {
+        return selectedLocations;
     }
 }
 

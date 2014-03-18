@@ -18,6 +18,8 @@
 		D6AA8E3D18D1DC47006C1F1A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA8E3C18D1DC47006C1F1A /* MapKit.framework */; };
 		D6BAB80918D87C57004D79D5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6BAB80818D87C57004D79D5 /* LoginViewController.m */; };
 		D6BAB80C18D889F0004D79D5 /* NewUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6BAB80B18D889F0004D79D5 /* NewUserViewController.m */; };
+		D6BAB80F18D8BDD3004D79D5 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = D6BAB80E18D8BDD3004D79D5 /* Image.m */; };
+		D6BAB81218D8BE30004D79D5 /* ImageOps.m in Sources */ = {isa = PBXBuildFile; fileRef = D6BAB81118D8BE30004D79D5 /* ImageOps.m */; };
 		D6D196A218D3331000DE897F /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D196A118D3331000DE897F /* libsqlite3.0.dylib */; };
 		D6D196A418D3343000DE897F /* criminal_map.db in Resources */ = {isa = PBXBuildFile; fileRef = D6D196A318D3343000DE897F /* criminal_map.db */; };
 		D6D196A818D3382F00DE897F /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D196A718D3382F00DE897F /* Location.m */; };
@@ -52,6 +54,10 @@
 		D6BAB80818D87C57004D79D5 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ViewControllers/LoginViewController.m; sourceTree = "<group>"; };
 		D6BAB80A18D889F0004D79D5 /* NewUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewUserViewController.h; path = ViewControllers/NewUserViewController.h; sourceTree = "<group>"; };
 		D6BAB80B18D889F0004D79D5 /* NewUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewUserViewController.m; path = ViewControllers/NewUserViewController.m; sourceTree = "<group>"; };
+		D6BAB80D18D8BDD3004D79D5 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = Objects/Image.h; sourceTree = "<group>"; };
+		D6BAB80E18D8BDD3004D79D5 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Image.m; path = Objects/Image.m; sourceTree = "<group>"; };
+		D6BAB81018D8BE30004D79D5 /* ImageOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageOps.h; path = DBOps/ImageOps.h; sourceTree = "<group>"; };
+		D6BAB81118D8BE30004D79D5 /* ImageOps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageOps.m; path = DBOps/ImageOps.m; sourceTree = "<group>"; };
 		D6D196A118D3331000DE897F /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		D6D196A318D3343000DE897F /* criminal_map.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = criminal_map.db; sourceTree = "<group>"; };
 		D6D196A618D3382F00DE897F /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = Objects/Location.h; sourceTree = "<group>"; };
@@ -191,6 +197,8 @@
 				D6D196A718D3382F00DE897F /* Location.m */,
 				D6D196A918D338F100DE897F /* User.h */,
 				D6D196AA18D338F100DE897F /* User.m */,
+				D6BAB80D18D8BDD3004D79D5 /* Image.h */,
+				D6BAB80E18D8BDD3004D79D5 /* Image.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -202,6 +210,8 @@
 				D6D196B418D3455F00DE897F /* LocationOps.m */,
 				D6D196B618D3457200DE897F /* UserOps.h */,
 				D6D196B718D3457200DE897F /* UserOps.m */,
+				D6BAB81018D8BE30004D79D5 /* ImageOps.h */,
+				D6BAB81118D8BE30004D79D5 /* ImageOps.m */,
 			);
 			name = DBOps;
 			sourceTree = "<group>";
@@ -301,8 +311,10 @@
 				D6D196B818D3457200DE897F /* UserOps.m in Sources */,
 				D6D196AB18D338F100DE897F /* User.m in Sources */,
 				D6E4490518D1E0910020D8F5 /* MapViewController.m in Sources */,
+				D6BAB81218D8BE30004D79D5 /* ImageOps.m in Sources */,
 				D6D196A818D3382F00DE897F /* Location.m in Sources */,
 				D6AA8E1818D1DC08006C1F1A /* AppDelegate.m in Sources */,
+				D6BAB80F18D8BDD3004D79D5 /* Image.m in Sources */,
 				D6AA8E1418D1DC08006C1F1A /* main.m in Sources */,
 				D6E4490818D1E9BA0020D8F5 /* LocationViewController.m in Sources */,
 				D6E4490C18D246F50020D8F5 /* PlacesViewController.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "LocationViewController.h"
 #import "LocationOps.h"
+#import "ImageOps.h"
 
 @interface LocationViewController ()
 
@@ -101,6 +102,35 @@
         LocationOps *locOps = [[LocationOps alloc] init];
         [locOps saveData:loc completion:^(BOOL success, NSError *error) {
             if (success) {
+                Location *insertedLocation = [[locOps selectLocation:loc] objectAtIndex:0];
+                if (img1.image != nil || img2.image != nil || img3.image != nil) {
+                    ImageOps *imageOps = [[ImageOps alloc] init];
+                    if (img1.image != nil) {
+                        Image *image1 = [[Image alloc] init];
+                        image1.imageUrl = img1Url;
+                        image1.imageData = [[NSData alloc] initWithData:UIImagePNGRepresentation(img1.image)];
+                        image1.locationId = insertedLocation.locationId;
+                        [imageOps saveData:image1 completion:^(BOOL success, NSError *error) {
+                            
+                        }];
+                    } else if (img2.image != nil) {
+                        Image *image2 = [[Image alloc] init];
+                        image2.imageUrl = img2Url;
+                        image2.imageData = [[NSData alloc] initWithData:UIImagePNGRepresentation(img2.image)];
+                        image2.locationId = insertedLocation.locationId;
+                        [imageOps saveData:image2 completion:^(BOOL success, NSError *error) {
+                            
+                        }];
+                    } else if (img3.image != nil) {
+                        Image *image3 = [[Image alloc] init];
+                        image3.imageUrl = img3Url;
+                        image3.imageData = [[NSData alloc] initWithData:UIImagePNGRepresentation(img3.image)];
+                        image3.locationId = insertedLocation.locationId;
+                        [imageOps saveData:image3 completion:^(BOOL success, NSError *error) {
+                            
+                        }];
+                    }
+                }
                 [[[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Local salvo com sucesso" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
                 [self.navigationController popViewControllerAnimated:YES];
             } else {
@@ -222,7 +252,19 @@
     if ([info count] > 0) {
         UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
         if (image != nil) {
-            [img1 setImage:image];
+            if (img1.image == nil) {
+                [img1 setImage:image];
+                img1Url = [info objectForKey:UIImagePickerControllerReferenceURL];
+            } else if (img2.image == nil) {
+                [img2 setImage:image];
+                img2Url = [info objectForKey:UIImagePickerControllerReferenceURL];
+            } else if (img3.image == nil) {
+                [img3 setImage:image];
+                img3Url = [info objectForKey:UIImagePickerControllerReferenceURL];
+            }
+        }
+        if (img1.image != nil && img2.image != nil && img3.image != nil) {
+            [btnAddPhoto setHidden:TRUE];
         }
     }
 }

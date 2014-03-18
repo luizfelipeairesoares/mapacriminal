@@ -21,8 +21,11 @@
     IBOutlet UILabel *images;
     IBOutlet UILabel *noImages;
     IBOutlet UIImageView *img1;
+    NSString *img1Url;
     IBOutlet UIImageView *img2;
+    NSString *img2Url;
     IBOutlet UIImageView *img3;
+    NSString *img3Url;
     IBOutlet UIButton *btnAddPhoto;
     
     NSDate *selectedDate;

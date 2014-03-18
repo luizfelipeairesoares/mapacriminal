@@ -16,6 +16,7 @@
 }
 
 - (NSArray *)selectAllLocations;
+- (NSArray *)selectLocation:(Location *) location;
 - (void)saveData:(Location *)location completion:(void (^)(BOOL success, NSError *error))completion;
 - (void)updateData:(Location *) location;
 - (void)deleteData:(Location *) location;
