@@ -45,6 +45,14 @@
     UserOps *userOps = [[UserOps alloc] init];
     User *u = [userOps selectUser:txtLogin.text pass:txtPass.text];
     if (u != nil) {
+        NSMutableDictionary *userDict = [[NSMutableDictionary alloc] init];
+        [userDict setValue:[NSString stringWithFormat:@"%d", u.userId] forKey:@"user_id"];
+        [userDict setValue:u.userFullname forKey:@"user_name"];
+        [userDict setValue:u.userNick forKey:@"user_nick"];
+        [userDict setValue:[NSString stringWithFormat:@"%d", u.userPoliceId] forKey:@"police_id"];
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:userDict forKey:@"CurrentUser"];
+        [userDefaults synchronize];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         MapViewController *mapView = [storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mapView];

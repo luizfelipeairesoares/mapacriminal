@@ -57,7 +57,6 @@
                     [locations addObject:loc];
                 }
                 sqlite3_finalize(sqlStatement);
-                sqlite3_close(db);
             }
         }
     }
@@ -65,6 +64,7 @@
         NSLog(@"Exceção: %@", [exception reason]);
     }
     @finally {
+        sqlite3_close(db);
         return locations;
     }
 }
@@ -80,7 +80,7 @@
                 NSLog(@"Erro ao abrir o banco.");
                 return nil;
             }
-            NSString *sql = [NSString stringWithFormat:@"SELECT * FROM LOCATIONS where user_id = %d and location_lat = %f and location_lng = %f and location_name = \"%@\"", location.userId, location.locationLat, location.locationLng, location.locationName];
+            NSString *sql = [NSString stringWithFormat:@"SELECT * FROM LOCATIONS where user_id = %d and location_lat = %f and location_lng = %f", location.userId, location.locationLat, location.locationLng];
             sqlite3_stmt *sqlStatement;
             if(sqlite3_prepare_v2(db, [sql UTF8String], -1, &sqlStatement, nil) != SQLITE_OK) {
                 NSLog(@"Erro com o statement");
@@ -116,7 +116,6 @@
                     [selectedLocations addObject:loc];
                 }
                 sqlite3_finalize(sqlStatement);
-                sqlite3_close(db);
             }
         }
     }
@@ -124,6 +123,7 @@
         NSLog(@"%@", [exception reason]);
     }
     @finally {
+//        sqlite3_close(db);
         return selectedLocations;
     }
 }
@@ -141,32 +141,121 @@
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
             NSString *formattedDate = [dateFormatter stringFromDate:location.locationDtCreated];
-            NSString *sql = [NSString stringWithFormat:@"INSERT INTO LOCATIONS(location_name, location_lat, location_lng, location_dt_criacao, user_id) VALUES (\"%@\", %f, %f, \"%@\", %d)", location.locationName, location.locationLat, location.locationLng, formattedDate, 1];
-            sqlite3_stmt *sqlStatement;
-            if(sqlite3_prepare_v2(db, [sql UTF8String], -1, &sqlStatement, nil) != SQLITE_OK) {
-                NSLog(@"Erro com o statement");
-            } else {
-                if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, NULL) == SQLITE_OK) {
-                    completion(true, nil);
-                } else {
+            Location *duplicity = [self verifyIfLocationExists:location];
+            if (duplicity != nil) {
+                NSString *sql = [NSString stringWithFormat:@"INSERT INTO LOCATIONS(location_name, location_lat, location_lng, location_dt_criacao, user_id) VALUES (\"%@\", %f, %f, \"%@\", %d)", location.locationName, location.locationLat, location.locationLng, formattedDate, location.userId];
+                sqlite3_stmt *sqlStatement;
+                if(sqlite3_prepare_v2(db, [sql UTF8String], -1, &sqlStatement, nil) != SQLITE_OK) {
+                    NSLog(@"Erro com o statement: %s", sqlite3_errmsg(db));
                     completion(false, nil);
+                } else {
+                    if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, NULL) == SQLITE_OK) {
+                        completion(true, nil);
+                    } else {
+                        completion(false, nil);
+                    }
                 }
+                sqlite3_finalize(sqlStatement);
+            } else {
+                duplicity.userId = location.userId;
+                duplicity.locationName = location.locationName;
+                duplicity.locationText = location.locationText;
+                [self updateData:duplicity completion:^(BOOL success, NSError *error) {
+                    if (success) {
+                        completion(true, nil);
+                    } else {
+                        completion(false, nil);
+                    }
+                }];
             }
-            sqlite3_finalize(sqlStatement);
-            sqlite3_close(db);
         }
     }
     @catch(NSException *exception) {
         NSLog(@"%@", [exception reason]);
+        completion(false, nil);
+    }
+    @finally {
+        sqlite3_close(db);
     }
 }
 
-- (void)updateData:(Location *)location {
-    
+- (void)updateData:(Location *)location completion:(void (^)(BOOL success, NSError *error))completionBlock {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    @try {
+        NSFileManager *fileMgr = [NSFileManager defaultManager];
+        BOOL success = [fileMgr fileExistsAtPath:appDelegate.dbPath];
+        if (success) {
+            if(!(sqlite3_open([appDelegate.dbPath UTF8String], &db) == SQLITE_OK)) {
+                NSLog(@"Erro ao abrir o banco.");
+                return;
+            }
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
+            NSString *formattedDate = [dateFormatter stringFromDate:[NSDate date]];
+            NSString *sql = [NSString stringWithFormat:@"UPDATE LOCATIONS SET location_name = \"%@\", location_text = \"%@\", location_dt_modificacao = \"%@\", user_id = %d WHERE location_id = %d", location.locationName, location.locationText, formattedDate, location.userId, location.locationId];
+                sqlite3_stmt *sqlStatement;
+            if(sqlite3_prepare_v2(db, [sql UTF8String], -1, &sqlStatement, nil) != SQLITE_OK) {
+                NSLog(@"Erro com o statement: %s", sqlite3_errmsg(db));
+                completionBlock(false, nil);
+            } else {
+                if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, NULL) == SQLITE_OK) {
+                    completionBlock(true, nil);
+                } else {
+                    completionBlock(false, nil);
+                }
+            }
+            sqlite3_finalize(sqlStatement);
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@", [exception reason]);
+        completionBlock(false, nil);
+    }
+    @finally {
+        sqlite3_close(db);
+    }
 }
 
-- (void)deleteData:(Location *)location {
-    
+- (void)deleteData:(Location *)location completion:(void (^)(BOOL success, NSError *error))completionBlock {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    @try {
+        NSFileManager *fileMgr = [NSFileManager defaultManager];
+        BOOL success = [fileMgr fileExistsAtPath:appDelegate.dbPath];
+        if (success) {
+            if(!(sqlite3_open([appDelegate.dbPath UTF8String], &db) == SQLITE_OK)) {
+                NSLog(@"Erro ao abrir o banco.");
+                return;
+            }
+            NSString *sql = [NSString stringWithFormat:@"DELETE FROM LOCATIONS WHERE location_id = %d", location.locationId];
+            sqlite3_stmt *sqlStatement;
+            if(sqlite3_prepare_v2(db, [sql UTF8String], -1, &sqlStatement, nil) != SQLITE_OK) {
+                NSLog(@"Erro com o statement: %s", sqlite3_errmsg(db));
+                completionBlock(false, nil);
+            } else {
+                if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, NULL) == SQLITE_OK) {
+                    completionBlock(true, nil);
+                } else {
+                    completionBlock(false, nil);
+                }
+            }
+            sqlite3_finalize(sqlStatement);
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@", [exception reason]);
+        completionBlock(false, nil);
+    }
+    @finally {
+        sqlite3_close(db);
+    }
+}
+
+- (Location *)verifyIfLocationExists:(Location *)location {
+    NSArray *loc = [self selectLocation:location];
+    if (loc != nil && ([loc count] > 0) && ([loc objectAtIndex:0] != nil)) {
+        [loc objectAtIndex:0];
+    }
+    return nil;
 }
 
 @end

@@ -18,7 +18,7 @@
 - (NSArray *)selectAllLocations;
 - (NSArray *)selectLocation:(Location *) location;
 - (void)saveData:(Location *)location completion:(void (^)(BOOL success, NSError *error))completion;
-- (void)updateData:(Location *) location;
-- (void)deleteData:(Location *) location;
+- (void)updateData:(Location *)location completion:(void (^)(BOOL success, NSError *error))completionBlock;
+- (void)deleteData:(Location *)location completion:(void (^)(BOOL success, NSError *error))completionBlock;
 
 @end

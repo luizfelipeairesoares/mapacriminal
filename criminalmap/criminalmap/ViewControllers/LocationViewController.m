@@ -43,6 +43,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    //TODO: Adicionar botão de deletar
     [super viewDidAppear:animated];
     if (self.currentLocation != nil) {
         [self.txtName setText:self.currentLocation.locationName];
@@ -92,6 +93,8 @@
 - (IBAction)btnSalvarTouched:(id)sender {
     if ([self checkBlankFields]) {
         Location *loc = [[Location alloc] init];
+        NSDictionary *currentUser = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentUser"];
+        loc.userId = [[currentUser objectForKey:@"user_id"] intValue];
         loc.locationName = self.txtName.text;
         loc.locationLat = [self.lblLatitude.text doubleValue];
         loc.locationLng = [self.lblLongitude.text doubleValue];
@@ -154,13 +157,18 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     if (textField.tag == 1) {
-        [self showDatePicker];
         [self dismissKeyboard:textField];
+        [self showDatePicker];
+    } else {
+        [self dismissDatePicker:nil];
     }
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [self dismissKeyboard:textField];
+}
+
 - (IBAction)dismissKeyboard:(id)sender {
-//    [[self.view viewWithTag:9] removeFromSuperview];
     if ([sender class] == [UIBarButtonItem class]) {
         [self.txtObs resignFirstResponder];
     } else {
