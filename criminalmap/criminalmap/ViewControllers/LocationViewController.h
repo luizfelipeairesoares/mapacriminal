@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "Location.h"
 
-@interface LocationViewController : UIViewController <UIPickerViewDelegate, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate> {
+@interface LocationViewController : UIViewController <UIPickerViewDelegate, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate> {
     AppDelegate *appDelegate;
     
     IBOutlet UILabel *name;

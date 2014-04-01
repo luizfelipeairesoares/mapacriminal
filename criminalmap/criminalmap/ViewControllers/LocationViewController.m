@@ -49,6 +49,13 @@
         [self.txtName setText:self.currentLocation.locationName];
         [self.lblLatitude setText:[NSString stringWithFormat:@"%f", self.currentLocation.locationLat]];
         [self.lblLongitude setText:[NSString stringWithFormat:@"%f", self.currentLocation.locationLng]];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm"];
+        if (self.currentLocation.locationDtModified != nil) {
+            [self.txtDate setText:[dateFormatter stringFromDate:self.currentLocation.locationDtModified]];
+        } else {
+            [self.txtDate setText:[dateFormatter stringFromDate:self.currentLocation.locationDtCreated]];
+        }
     } else {
         [self.lblLatitude setText:[NSString stringWithFormat:@"%f", appDelegate.locManager.location.coordinate.latitude]];
         [self.lblLongitude setText:[NSString stringWithFormat:@"%f", appDelegate.locManager.location.coordinate.longitude]];
@@ -92,20 +99,24 @@
 
 - (IBAction)btnSalvarTouched:(id)sender {
     if ([self checkBlankFields]) {
-        Location *loc = [[Location alloc] init];
+        if (self.currentLocation == nil) {
+            self.currentLocation = [[Location alloc] init];
+            self.currentLocation.locationDtCreated = selectedDate;
+        } else {
+            self.currentLocation.locationDtModified = [NSDate date];
+        }
         NSDictionary *currentUser = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentUser"];
-        loc.userId = [[currentUser objectForKey:@"user_id"] intValue];
-        loc.locationName = self.txtName.text;
-        loc.locationLat = [self.lblLatitude.text doubleValue];
-        loc.locationLng = [self.lblLongitude.text doubleValue];
-        loc.locationDtCreated = selectedDate;
+        self.currentLocation.userId = [[currentUser objectForKey:@"user_id"] intValue];
+        self.currentLocation.locationName = self.txtName.text;
+        self.currentLocation.locationLat = [self.lblLatitude.text doubleValue];
+        self.currentLocation.locationLng = [self.lblLongitude.text doubleValue];
         if (self.txtObs.text != nil && ![self.txtObs.text isEqualToString:@""]) {
-            loc.locationText = self.txtObs.text;
+            self.currentLocation.locationText = self.txtObs.text;
         }
         LocationOps *locOps = [[LocationOps alloc] init];
-        [locOps saveData:loc completion:^(BOOL success, NSError *error) {
+        [locOps saveData:self.currentLocation completion:^(BOOL success, NSError *error) {
             if (success) {
-                Location *insertedLocation = [[locOps selectLocation:loc] objectAtIndex:0];
+                Location *insertedLocation = [[locOps selectLocation:self.currentLocation] objectAtIndex:0];
                 if (img1.image != nil || img2.image != nil || img3.image != nil) {
                     ImageOps *imageOps = [[ImageOps alloc] init];
                     if (img1.image != nil) {
@@ -135,7 +146,6 @@
                     }
                 }
                 [[[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Local salvo com sucesso" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-                [self.navigationController popViewControllerAnimated:YES];
             } else {
                 [[[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Ocorreu um erro ao salvar o local. Por favor, tente novamente" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
                 NSLog(@"%@", error);
@@ -290,6 +300,15 @@
         return true;
     }
     return false;
+}
+
+#pragma mark - AlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == alertView.cancelButtonIndex) {
+        [self.navigationController popViewControllerAnimated:YES];
+        self.currentLocation = nil;
+    }
 }
 
 /*

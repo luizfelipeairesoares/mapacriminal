@@ -38,10 +38,11 @@
                     char *locTxt = (char *)sqlite3_column_text(sqlStatement, 10);
                     
                     Location *loc = [[Location alloc] init];
-                    NSString *strDate = [NSString stringWithUTF8String:dateCreated];
+                    NSString *strDateAndHour = [NSString stringWithUTF8String:dateCreated];
                     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
-                    loc.locationDtCreated = [dateFormatter dateFromString:strDate];
+                    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                    NSDate *d = [dateFormatter dateFromString:strDateAndHour];
+                    loc.locationDtCreated = d;
                     if (dateModified != nil) {
                         NSString *strModified = [NSString stringWithUTF8String:dateModified];
                         loc.locationDtModified = [dateFormatter dateFromString:strModified];
@@ -142,8 +143,8 @@
             [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
             NSString *formattedDate = [dateFormatter stringFromDate:location.locationDtCreated];
             Location *duplicity = [self verifyIfLocationExists:location];
-            if (duplicity != nil) {
-                NSString *sql = [NSString stringWithFormat:@"INSERT INTO LOCATIONS(location_name, location_lat, location_lng, location_dt_criacao, user_id) VALUES (\"%@\", %f, %f, \"%@\", %d)", location.locationName, location.locationLat, location.locationLng, formattedDate, location.userId];
+            if (duplicity == nil) {
+                NSString *sql = [NSString stringWithFormat:@"INSERT INTO LOCATIONS(location_name, location_lat, location_lng, location_dt_criacao, location_text, user_id) VALUES (\"%@\", %f, %f, \"%@\", \"%@\", %d)", location.locationName, location.locationLat, location.locationLng, formattedDate, location.locationText, location.userId];
                 sqlite3_stmt *sqlStatement;
                 if(sqlite3_prepare_v2(db, [sql UTF8String], -1, &sqlStatement, nil) != SQLITE_OK) {
                     NSLog(@"Erro com o statement: %s", sqlite3_errmsg(db));
