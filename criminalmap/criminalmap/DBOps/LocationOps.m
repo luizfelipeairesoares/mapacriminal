@@ -151,6 +151,7 @@
                     completion(false, nil);
                 } else {
                     if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, NULL) == SQLITE_OK) {
+                        NSLog(@"Erro: %s", sqlite3_errmsg(db));
                         completion(true, nil);
                     } else {
                         completion(false, nil);

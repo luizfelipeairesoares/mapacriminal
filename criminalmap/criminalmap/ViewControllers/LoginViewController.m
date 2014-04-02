@@ -57,6 +57,8 @@
         MapViewController *mapView = [storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mapView];
         [self.view.window setRootViewController:navController];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"Mancha Criminal" message:@"Usuário não encontrado" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
     }
 }
 
