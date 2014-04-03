@@ -49,8 +49,10 @@
         [txtSenha becomeFirstResponder];
     } else if ([sender tag] == 3) {
         [txtConfirmacaoSenha becomeFirstResponder];
+        [self.view setFrame:CGRectMake(self.view.frame.origin.x, (self.view.frame.origin.y-50.0), self.view.frame.size.width, self.view.frame.size.height)];
     } else {
         [sender resignFirstResponder];
+        [self.view setFrame:CGRectMake(self.view.frame.origin.x, (self.view.frame.origin.y+50.0), self.view.frame.size.width, self.view.frame.size.height)];
     }
 }
 
@@ -67,9 +69,9 @@
         UserOps *userOps = [[UserOps alloc] init];
         [userOps saveData:newUser completion:^(BOOL success, NSError *error) {
             if (success) {
-                [self dismissViewControllerAnimated:YES completion:^() {
-                    [[[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Usuário criado com sucesso" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-                }];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Usuário criado com sucesso" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                alert.tag = 1;
+                [alert show];
             } else {
                 [[[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Erro ao criar o usuário" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
             }
@@ -95,6 +97,14 @@
     }
     [[[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Verifique se todos os campos foram preenchidos" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
     return false;
+}
+
+#pragma mark = AlertView
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 1 && buttonIndex == alertView.cancelButtonIndex) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 /*

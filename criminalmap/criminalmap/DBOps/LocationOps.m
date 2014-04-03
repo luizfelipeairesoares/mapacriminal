@@ -31,11 +31,11 @@
                     char *dateCreated = (char *)sqlite3_column_text(sqlStatement, 0);
                     char *dateModified = (char *)sqlite3_column_text(sqlStatement, 1);
                     int uniqueId = sqlite3_column_int(sqlStatement, 2);
-                    char *locLat = (char *)sqlite3_column_text(sqlStatement, 6);
-                    char *locLng = (char *)sqlite3_column_text(sqlStatement, 7);
-                    char *locName = (char *)sqlite3_column_text(sqlStatement, 8);
-                    int userId = sqlite3_column_int(sqlStatement, 9);
-                    char *locTxt = (char *)sqlite3_column_text(sqlStatement, 10);
+                    char *locLat = (char *)sqlite3_column_text(sqlStatement, 3);
+                    char *locLng = (char *)sqlite3_column_text(sqlStatement, 4);
+                    char *locName = (char *)sqlite3_column_text(sqlStatement, 5);
+                    char *locTxt = (char *)sqlite3_column_text(sqlStatement, 6);
+                    int userId = sqlite3_column_int(sqlStatement, 7);
                     
                     Location *loc = [[Location alloc] init];
                     NSString *strDateAndHour = [NSString stringWithUTF8String:dateCreated];
@@ -146,13 +146,20 @@
             if (duplicity == nil) {
                 NSString *sql = [NSString stringWithFormat:@"INSERT INTO LOCATIONS(location_name, location_lat, location_lng, location_dt_criacao, location_text, user_id) VALUES (\"%@\", %f, %f, \"%@\", \"%@\", %d)", location.locationName, location.locationLat, location.locationLng, formattedDate, location.locationText, location.userId];
                 sqlite3_stmt *sqlStatement;
+                char *errMsg;
                 if(sqlite3_prepare_v2(db, [sql UTF8String], -1, &sqlStatement, nil) != SQLITE_OK) {
                     NSLog(@"Erro com o statement: %s", sqlite3_errmsg(db));
                     completion(false, nil);
                 } else {
+<<<<<<< HEAD
+                    if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &errMsg) == SQLITE_OK) {
+=======
                     if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, NULL) == SQLITE_OK) {
+                        NSLog(@"Erro: %s", sqlite3_errmsg(db));
+>>>>>>> FETCH_HEAD
                         completion(true, nil);
                     } else {
+                        NSLog(@"%s", errMsg);
                         completion(false, nil);
                     }
                 }

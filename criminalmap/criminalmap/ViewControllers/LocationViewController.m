@@ -116,36 +116,48 @@
         LocationOps *locOps = [[LocationOps alloc] init];
         [locOps saveData:self.currentLocation completion:^(BOOL success, NSError *error) {
             if (success) {
+<<<<<<< HEAD
+//                Location *insertedLocation = [[locOps selectLocation:self.currentLocation] objectAtIndex:0];
+=======
                 Location *insertedLocation = [[locOps selectLocation:self.currentLocation] objectAtIndex:0];
-                if (img1.image != nil || img2.image != nil || img3.image != nil) {
-                    ImageOps *imageOps = [[ImageOps alloc] init];
-                    if (img1.image != nil) {
-                        Image *image1 = [[Image alloc] init];
-                        image1.imageUrl = img1Url;
-                        image1.imageData = [[NSData alloc] initWithData:UIImagePNGRepresentation(img1.image)];
-                        image1.locationId = insertedLocation.locationId;
-                        [imageOps saveData:image1 completion:^(BOOL success, NSError *error) {
-                            
-                        }];
-                    } else if (img2.image != nil) {
-                        Image *image2 = [[Image alloc] init];
-                        image2.imageUrl = img2Url;
-                        image2.imageData = [[NSData alloc] initWithData:UIImagePNGRepresentation(img2.image)];
-                        image2.locationId = insertedLocation.locationId;
-                        [imageOps saveData:image2 completion:^(BOOL success, NSError *error) {
-                            
-                        }];
-                    } else if (img3.image != nil) {
-                        Image *image3 = [[Image alloc] init];
-                        image3.imageUrl = img3Url;
-                        image3.imageData = [[NSData alloc] initWithData:UIImagePNGRepresentation(img3.image)];
-                        image3.locationId = insertedLocation.locationId;
-                        [imageOps saveData:image3 completion:^(BOOL success, NSError *error) {
-                            
-                        }];
-                    }
-                }
-                [[[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Local salvo com sucesso" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+>>>>>>> FETCH_HEAD
+//                if (img1.image != nil || img2.image != nil || img3.image != nil) {
+//                    ImageOps *imageOps = [[ImageOps alloc] init];
+//                    if (img1.image != nil) {
+//                        Image *image1 = [[Image alloc] init];
+//                        image1.imageUrl = img1Url;
+//                        image1.imageData = [[NSData alloc] initWithData:UIImagePNGRepresentation(img1.image)];
+//                        image1.locationId = insertedLocation.locationId;
+//                        [imageOps saveData:image1 completion:^(BOOL success, NSError *error) {
+//                            
+//                        }];
+//                    } else if (img2.image != nil) {
+//                        Image *image2 = [[Image alloc] init];
+//                        image2.imageUrl = img2Url;
+//                        image2.imageData = [[NSData alloc] initWithData:UIImagePNGRepresentation(img2.image)];
+//                        image2.locationId = insertedLocation.locationId;
+//                        [imageOps saveData:image2 completion:^(BOOL success, NSError *error) {
+//                            
+//                        }];
+//                    } else if (img3.image != nil) {
+//                        Image *image3 = [[Image alloc] init];
+//                        image3.imageUrl = img3Url;
+//                        image3.imageData = [[NSData alloc] initWithData:UIImagePNGRepresentation(img3.image)];
+//                        image3.locationId = insertedLocation.locationId;
+//                        [imageOps saveData:image3 completion:^(BOOL success, NSError *error) {
+//                            
+//                        }];
+//                    }
+//                }
+<<<<<<< HEAD
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Local salvo com sucesso" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                alert.tag = 1;
+                [alert show];
+=======
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Local salvo com sucesso" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alertView setTag:1];
+                [alertView show];
+>>>>>>> FETCH_HEAD
             } else {
                 [[[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Ocorreu um erro ao salvar o local. Por favor, tente novamente" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
                 NSLog(@"%@", error);
@@ -305,7 +317,7 @@
 #pragma mark - AlertView Delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == alertView.cancelButtonIndex) {
+    if (alertView.tag == 1 && buttonIndex == alertView.cancelButtonIndex) {
         [self.navigationController popViewControllerAnimated:YES];
         self.currentLocation = nil;
     }

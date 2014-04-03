@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewUserViewController : UIViewController {
+@interface NewUserViewController : UIViewController <UIAlertViewDelegate> {
     IBOutlet UITextField *txtNomeCompleto;
     IBOutlet UITextField *txtApelido;
     IBOutlet UITextField *txtPoliciaId;

@@ -80,7 +80,6 @@
             if(sqlite3_prepare_v2(db, [sql UTF8String], -1, &sqlStatement, nil) != SQLITE_OK) {
                 NSLog(@"Erro com o statement");
             } else {
-                user = [[User alloc] init];
                 while (sqlite3_step(sqlStatement) == SQLITE_ROW) {
                     char *dateCreated = (char *)sqlite3_column_text(sqlStatement, 0);
                     char *dateModified = (char *)sqlite3_column_text(sqlStatement, 1);
@@ -97,6 +96,7 @@
                         NSString *strModified = [NSString stringWithUTF8String:dateModified];
                         user.userDtModified = [dateFormatter dateFromString:strModified];
                     }
+                    user = [[User alloc] init];
                     user.userId = uniqueId;
                     user.userFullname = [NSString stringWithUTF8String:userName];
                     user.userNick = [NSString stringWithUTF8String:userNick];
