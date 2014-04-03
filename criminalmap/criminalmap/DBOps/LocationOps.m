@@ -151,12 +151,8 @@
                     NSLog(@"Erro com o statement: %s", sqlite3_errmsg(db));
                     completion(false, nil);
                 } else {
-<<<<<<< HEAD
                     if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &errMsg) == SQLITE_OK) {
-=======
-                    if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, NULL) == SQLITE_OK) {
                         NSLog(@"Erro: %s", sqlite3_errmsg(db));
->>>>>>> FETCH_HEAD
                         completion(true, nil);
                     } else {
                         NSLog(@"%s", errMsg);

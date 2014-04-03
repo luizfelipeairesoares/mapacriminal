@@ -116,11 +116,7 @@
         LocationOps *locOps = [[LocationOps alloc] init];
         [locOps saveData:self.currentLocation completion:^(BOOL success, NSError *error) {
             if (success) {
-<<<<<<< HEAD
 //                Location *insertedLocation = [[locOps selectLocation:self.currentLocation] objectAtIndex:0];
-=======
-                Location *insertedLocation = [[locOps selectLocation:self.currentLocation] objectAtIndex:0];
->>>>>>> FETCH_HEAD
 //                if (img1.image != nil || img2.image != nil || img3.image != nil) {
 //                    ImageOps *imageOps = [[ImageOps alloc] init];
 //                    if (img1.image != nil) {
@@ -149,15 +145,9 @@
 //                        }];
 //                    }
 //                }
-<<<<<<< HEAD
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Local salvo com sucesso" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                alert.tag = 1;
-                [alert show];
-=======
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Local salvo com sucesso" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alertView setTag:1];
                 [alertView show];
->>>>>>> FETCH_HEAD
             } else {
                 [[[UIAlertView alloc] initWithTitle:@"Mapa Criminal" message:@"Ocorreu um erro ao salvar o local. Por favor, tente novamente" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
                 NSLog(@"%@", error);
