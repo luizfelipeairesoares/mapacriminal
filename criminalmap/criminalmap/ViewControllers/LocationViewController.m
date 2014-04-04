@@ -9,8 +9,11 @@
 #import "LocationViewController.h"
 #import "LocationOps.h"
 #import "ImageOps.h"
+#import "MMPickerView.h"
 
 @interface LocationViewController ()
+
+@property(assign) BOOL isModusPickerShown;
 
 @end
 
@@ -32,6 +35,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (appDelegate.arrayModus == nil) {
+        [appDelegate selectModus];
+    }
     
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, 44)];
     toolbar.tag = 8;
@@ -40,6 +46,7 @@
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissKeyboard:)];
     [toolbar setItems:[NSArray arrayWithObjects:spacer, doneButton, nil]];
     [self.txtObs setInputAccessoryView:toolbar];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -86,6 +93,9 @@
         [img3 setFrame:CGRectMake(img3.frame.origin.x, (img3.frame.origin.y + 70.0), img3.frame.size.width, img3.frame.size.height)];
         [noImages setFrame:CGRectMake(noImages.frame.origin.x, (noImages.frame.origin.y + 70.0), noImages.frame.size.width, noImages.frame.size.height)];
         [btnAddPhoto setFrame:CGRectMake(btnAddPhoto.frame.origin.x, (btnAddPhoto.frame.origin.y + 70.0), btnAddPhoto.frame.size.width, btnAddPhoto.frame.size.height)];
+        [lblModus setFrame:CGRectMake(lblModus.frame.origin.x, (lblModus.frame.origin.y + 70.0), lblModus.frame.size.width, lblModus.frame.size.height)];
+        [lblTxtModus setFrame:CGRectMake(lblTxtModus.frame.origin.x, (lblTxtModus.frame.origin.y + 70.0), lblTxtModus.frame.size.width, lblTxtModus.frame.size.height)];
+        [btnModus setFrame:CGRectMake(btnModus.frame.origin.x, (btnModus.frame.origin.y + 70.0), btnModus.frame.size.width, btnModus.frame.size.height)];
     }
 }
 
@@ -163,6 +173,20 @@
     imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     [imagePicker setDelegate:self];
     [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (IBAction)btnModusTouched:(id)sender {
+    if (!self.isModusPickerShown) {
+        [MMPickerView showPickerViewInView:self.view withStrings:appDelegate.arrayModus
+                               withOptions:nil
+                          actionCompletion:^(NSString *actionCompletion) {
+                                    self.isModusPickerShown = NO;
+                          }
+                                completion:^(NSString *selectedString) {
+                                    [lblTxtModus setText:selectedString];
+                                }
+        ];
+    }
 }
 
 #pragma mark - TextField Delegate

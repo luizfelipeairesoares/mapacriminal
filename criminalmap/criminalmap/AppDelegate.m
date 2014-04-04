@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "Modus.h"
 
 @implementation AppDelegate
 
@@ -81,6 +82,14 @@
         NSString *copydbpath = [homeDir stringByAppendingPathComponent:@"criminal_map.db"];
         self.dbPath = copydbpath;
     }
+}
+
+- (void)selectModus {
+    if (self.arrayModus == nil) {
+        self.arrayModus = [[NSMutableArray alloc] init];
+    }
+    Modus *m = [[Modus alloc] init];
+    self.arrayModus = [m selectAllModus];
 }
 
 @end

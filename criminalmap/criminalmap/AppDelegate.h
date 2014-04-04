@@ -18,5 +18,8 @@
 @property (strong, nonatomic) CLLocationManager *locManager;
 @property (strong, nonatomic) CLGeocoder *geocoder;
 @property (strong, nonatomic) NSString *dbPath;
+@property (strong, nonatomic) NSMutableArray *arrayModus;
+
+- (void)selectModus;
 
 @end

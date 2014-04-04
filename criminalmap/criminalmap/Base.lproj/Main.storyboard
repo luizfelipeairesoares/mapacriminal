@@ -104,14 +104,21 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Modus Operandi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBi-eK-mff">
+                                <rect key="frame" x="20" y="170" width="120" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Obs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MyV-ca-MhF">
-                                <rect key="frame" x="20" y="171" width="40" height="21"/>
+                                <rect key="frame" x="20" y="207" width="40" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Digite aqui as observações" translatesAutoresizingMaskIntoConstraints="NO" id="dPV-av-fgW">
-                                <rect key="frame" x="20" y="196" width="280" height="160"/>
+                                <rect key="frame" x="20" y="236" width="280" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -206,12 +213,29 @@
                                     <action selector="btnAddPhotoTouched:" destination="Eh2-vk-BmI" eventType="touchUpInside" id="fPZ-g9-1EW"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3D-jk-V6C">
+                                <rect key="frame" x="160" y="170" width="140" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="15"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMX-0Z-eFT">
+                                <rect key="frame" x="160" y="170" width="140" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnModusTouched:" destination="Eh2-vk-BmI" eventType="touchUpInside" id="XAz-68-uK9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="btnAddPhoto" destination="QcK-co-0fI" id="HDl-CR-mPh"/>
+                        <outlet property="btnModus" destination="BMX-0Z-eFT" id="KUf-1R-N7a"/>
                         <outlet property="btnSalvar" destination="VTi-7G-0fD" id="EnS-8M-CwB"/>
                         <outlet property="data" destination="e0I-si-tIX" id="FV9-MA-fnb"/>
                         <outlet property="images" destination="elN-Ho-6BH" id="SU9-Qi-VZp"/>
@@ -221,6 +245,8 @@
                         <outlet property="latitude" destination="9hq-fs-Gss" id="KdI-GQ-0ED"/>
                         <outlet property="lblLatitude" destination="cF8-1u-QAa" id="49V-BU-na8"/>
                         <outlet property="lblLongitude" destination="8IH-dx-rvt" id="yd4-k8-soH"/>
+                        <outlet property="lblModus" destination="JBi-eK-mff" id="IhC-2W-q9J"/>
+                        <outlet property="lblTxtModus" destination="t3D-jk-V6C" id="si2-Zm-9wr"/>
                         <outlet property="longitude" destination="V8H-hS-4RM" id="XJ7-AK-fzM"/>
                         <outlet property="name" destination="Bjj-dz-oDc" id="wxC-gq-whF"/>
                         <outlet property="noImages" destination="Fql-hu-9Oa" id="v1n-bR-F1P"/>

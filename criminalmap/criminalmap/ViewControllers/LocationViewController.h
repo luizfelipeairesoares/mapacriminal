@@ -27,6 +27,9 @@
     IBOutlet UIImageView *img3;
     NSString *img3Url;
     IBOutlet UIButton *btnAddPhoto;
+    IBOutlet UILabel *lblModus;
+    IBOutlet UILabel *lblTxtModus;
+    IBOutlet UIButton *btnModus;
     
     NSDate *selectedDate;
     BOOL pickerIsShown;

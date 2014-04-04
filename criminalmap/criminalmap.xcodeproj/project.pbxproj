@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D674A2CB18EF3ACA000FD4A3 /* Modus.m in Sources */ = {isa = PBXBuildFile; fileRef = D674A2CA18EF3ACA000FD4A3 /* Modus.m */; };
+		D674A2CF18EF3D7E000FD4A3 /* MMPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D674A2CE18EF3D7E000FD4A3 /* MMPickerView.m */; };
 		D6AA8E0818D1DC08006C1F1A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA8E0718D1DC08006C1F1A /* Foundation.framework */; };
 		D6AA8E0A18D1DC08006C1F1A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA8E0918D1DC08006C1F1A /* CoreGraphics.framework */; };
 		D6AA8E0C18D1DC08006C1F1A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA8E0B18D1DC08006C1F1A /* UIKit.framework */; };
@@ -33,6 +35,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D674A2C918EF3ACA000FD4A3 /* Modus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Modus.h; path = DBOps/Modus.h; sourceTree = "<group>"; };
+		D674A2CA18EF3ACA000FD4A3 /* Modus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Modus.m; path = DBOps/Modus.m; sourceTree = "<group>"; };
+		D674A2CD18EF3D7E000FD4A3 /* MMPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMPickerView.h; path = ../../../../libs/ios/MMPickerView/MMPickerView/MMPickerView.h; sourceTree = "<group>"; };
+		D674A2CE18EF3D7E000FD4A3 /* MMPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMPickerView.m; path = ../../../../libs/ios/MMPickerView/MMPickerView/MMPickerView.m; sourceTree = "<group>"; };
 		D6AA8E0418D1DC08006C1F1A /* criminalmap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = criminalmap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6AA8E0718D1DC08006C1F1A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D6AA8E0918D1DC08006C1F1A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -95,6 +101,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D674A2CC18EF3D67000FD4A3 /* MMPicker */ = {
+			isa = PBXGroup;
+			children = (
+				D674A2CD18EF3D7E000FD4A3 /* MMPickerView.h */,
+				D674A2CE18EF3D7E000FD4A3 /* MMPickerView.m */,
+			);
+			name = MMPicker;
+			sourceTree = "<group>";
+		};
 		D6AA8DFB18D1DC08006C1F1A = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +201,7 @@
 		D6D196A018D3325A00DE897F /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				D674A2CC18EF3D67000FD4A3 /* MMPicker */,
 			);
 			name = libs;
 			sourceTree = "<group>";
@@ -212,6 +228,8 @@
 				D6D196B718D3457200DE897F /* UserOps.m */,
 				D6BAB81018D8BE30004D79D5 /* ImageOps.h */,
 				D6BAB81118D8BE30004D79D5 /* ImageOps.m */,
+				D674A2C918EF3ACA000FD4A3 /* Modus.h */,
+				D674A2CA18EF3ACA000FD4A3 /* Modus.m */,
 			);
 			name = DBOps;
 			sourceTree = "<group>";
@@ -310,6 +328,7 @@
 				D6D196B518D3455F00DE897F /* LocationOps.m in Sources */,
 				D6D196B818D3457200DE897F /* UserOps.m in Sources */,
 				D6D196AB18D338F100DE897F /* User.m in Sources */,
+				D674A2CB18EF3ACA000FD4A3 /* Modus.m in Sources */,
 				D6E4490518D1E0910020D8F5 /* MapViewController.m in Sources */,
 				D6BAB81218D8BE30004D79D5 /* ImageOps.m in Sources */,
 				D6D196A818D3382F00DE897F /* Location.m in Sources */,
@@ -318,6 +337,7 @@
 				D6AA8E1418D1DC08006C1F1A /* main.m in Sources */,
 				D6E4490818D1E9BA0020D8F5 /* LocationViewController.m in Sources */,
 				D6E4490C18D246F50020D8F5 /* PlacesViewController.m in Sources */,
+				D674A2CF18EF3D7E000FD4A3 /* MMPickerView.m in Sources */,
 				D6BAB80918D87C57004D79D5 /* LoginViewController.m in Sources */,
 				D6BAB80C18D889F0004D79D5 /* NewUserViewController.m in Sources */,
 				D6E4491018D249DF0020D8F5 /* PlacesCell.m in Sources */,
