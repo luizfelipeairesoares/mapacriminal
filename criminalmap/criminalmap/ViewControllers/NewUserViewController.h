@@ -15,6 +15,7 @@
     IBOutlet UITextField *txtSenha;
     IBOutlet UITextField *txtConfirmacaoSenha;
     IBOutlet UIButton *btnSalvar;
+    IBOutlet UIButton *btnVoltar;
 }
 
 @end

@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "Location.h"
 
-@interface LocationViewController : UIViewController <UIPickerViewDelegate, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate> {
+@interface LocationViewController : UIViewController <UIPickerViewDelegate, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate> {
     AppDelegate *appDelegate;
     
     IBOutlet UILabel *name;
@@ -30,6 +30,8 @@
     IBOutlet UILabel *lblModus;
     IBOutlet UILabel *lblTxtModus;
     IBOutlet UIButton *btnModus;
+    IBOutlet UILabel *lblModificacao;
+    IBOutlet UITextField *txtModificacao;
     
     NSDate *selectedDate;
     BOOL pickerIsShown;

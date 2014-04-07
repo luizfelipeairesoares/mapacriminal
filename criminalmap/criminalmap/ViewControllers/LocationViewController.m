@@ -14,7 +14,8 @@
 @interface LocationViewController ()
 
 @property(assign) BOOL isModusPickerShown;
-
+@property(strong, nonatomic) NSMutableArray *modus;
+@property(assign) int modusId;
 @end
 
 @implementation LocationViewController
@@ -63,6 +64,14 @@
         } else {
             [self.txtDate setText:[dateFormatter stringFromDate:self.currentLocation.locationDtCreated]];
         }
+        NSString *modusName = @"";
+        for (int i = 0; i < [appDelegate.arrayModus count]; i++) {
+            if (self.currentLocation.modusId == [[[appDelegate.arrayModus objectAtIndex:i] objectForKey:@"modus_id"] intValue]) {
+                modusName = [[appDelegate.arrayModus objectAtIndex:i] objectForKey:@"modus_name"];
+                break;
+            }
+        }
+        [lblTxtModus setText:modusName];
     } else {
         [self.lblLatitude setText:[NSString stringWithFormat:@"%f", appDelegate.locManager.location.coordinate.latitude]];
         [self.lblLongitude setText:[NSString stringWithFormat:@"%f", appDelegate.locManager.location.coordinate.longitude]];
@@ -96,6 +105,8 @@
         [lblModus setFrame:CGRectMake(lblModus.frame.origin.x, (lblModus.frame.origin.y + 70.0), lblModus.frame.size.width, lblModus.frame.size.height)];
         [lblTxtModus setFrame:CGRectMake(lblTxtModus.frame.origin.x, (lblTxtModus.frame.origin.y + 70.0), lblTxtModus.frame.size.width, lblTxtModus.frame.size.height)];
         [btnModus setFrame:CGRectMake(btnModus.frame.origin.x, (btnModus.frame.origin.y + 70.0), btnModus.frame.size.width, btnModus.frame.size.height)];
+        [lblModificacao setFrame:CGRectMake(lblModificacao.frame.origin.x, (lblModificacao.frame.origin.y + 70.0), lblModificacao.frame.size.width, lblModificacao.frame.size.height)];
+        [txtModificacao setFrame:CGRectMake(txtModificacao.frame.origin.x, (txtModificacao.frame.origin.y + 70.0), txtModificacao.frame.size.width, txtModificacao.frame.size.height)];
     }
 }
 
@@ -120,6 +131,7 @@
         self.currentLocation.locationName = self.txtName.text;
         self.currentLocation.locationLat = [self.lblLatitude.text doubleValue];
         self.currentLocation.locationLng = [self.lblLongitude.text doubleValue];
+        self.currentLocation.modusId = self.modusId;
         if (self.txtObs.text != nil && ![self.txtObs.text isEqualToString:@""]) {
             self.currentLocation.locationText = self.txtObs.text;
         }
@@ -177,13 +189,26 @@
 
 - (IBAction)btnModusTouched:(id)sender {
     if (!self.isModusPickerShown) {
-        [MMPickerView showPickerViewInView:self.view withStrings:appDelegate.arrayModus
+        if (self.modus == nil) {
+            self.modus = [[NSMutableArray alloc] init];
+            int i = 0;
+            while (i < [appDelegate.arrayModus count]) {
+                [self.modus addObject:[[appDelegate.arrayModus objectAtIndex:i] objectForKey:@"modus_name"]];
+                i++;
+            }
+        }
+        [MMPickerView showPickerViewInView:self.view withStrings:self.modus
                                withOptions:nil
                           actionCompletion:^(NSString *actionCompletion) {
                                     self.isModusPickerShown = NO;
                           }
                                 completion:^(NSString *selectedString) {
                                     [lblTxtModus setText:selectedString];
+                                    for (int i = 0; i < [appDelegate.arrayModus count]; i++) {
+                                        if ([[[appDelegate.arrayModus objectAtIndex:i] objectForKey:@"modus_name"] isEqualToString:selectedString]) {
+                                            self.modusId = [[[appDelegate.arrayModus objectAtIndex:i] objectForKey:@"modus_id"] intValue];
+                                        }
+                                    }
                                 }
         ];
     }

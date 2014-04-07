@@ -20,5 +20,6 @@
 @property(nonatomic) int userId;
 @property(strong, nonatomic) NSDate *locationDtCreated;
 @property(strong, nonatomic) NSDate *locationDtModified;
+@property(nonatomic, assign) int modusId;
 
 @end

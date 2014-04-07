@@ -35,7 +35,8 @@
                     char *locLng = (char *)sqlite3_column_text(sqlStatement, 4);
                     char *locName = (char *)sqlite3_column_text(sqlStatement, 5);
                     char *locTxt = (char *)sqlite3_column_text(sqlStatement, 6);
-                    int userId = sqlite3_column_int(sqlStatement, 7);
+                    int modusId = sqlite3_column_int(sqlStatement, 7);
+                    int userId = sqlite3_column_int(sqlStatement, 8);
                     
                     Location *loc = [[Location alloc] init];
                     NSString *strDateAndHour = [NSString stringWithUTF8String:dateCreated];
@@ -55,6 +56,7 @@
                     }
                     loc.userId = userId;
                     loc.locationName = [NSString stringWithUTF8String:locName];
+                    loc.modusId = modusId;
                     [locations addObject:loc];
                 }
                 sqlite3_finalize(sqlStatement);
@@ -91,11 +93,12 @@
                     char *dateCreated = (char *)sqlite3_column_text(sqlStatement, 0);
                     char *dateModified = (char *)sqlite3_column_text(sqlStatement, 1);
                     int uniqueId = sqlite3_column_int(sqlStatement, 2);
-                    char *locLat = (char *)sqlite3_column_text(sqlStatement, 6);
-                    char *locLng = (char *)sqlite3_column_text(sqlStatement, 7);
-                    char *locName = (char *)sqlite3_column_text(sqlStatement, 8);
-                    int userId = sqlite3_column_int(sqlStatement, 9);
-                    char *locTxt = (char *)sqlite3_column_text(sqlStatement, 10);
+                    char *locLat = (char *)sqlite3_column_text(sqlStatement, 3);
+                    char *locLng = (char *)sqlite3_column_text(sqlStatement, 4);
+                    char *locName = (char *)sqlite3_column_text(sqlStatement, 5);
+                    char *locTxt = (char *)sqlite3_column_text(sqlStatement, 6);
+                    int modusId = sqlite3_column_int(sqlStatement, 7);
+                    int userId = sqlite3_column_int(sqlStatement, 8);
                     
                     Location *loc = [[Location alloc] init];
                     NSString *strDate = [NSString stringWithUTF8String:dateCreated];
@@ -114,6 +117,7 @@
                     }
                     loc.userId = userId;
                     loc.locationName = [NSString stringWithUTF8String:locName];
+                    loc.modusId = modusId;
                     [selectedLocations addObject:loc];
                 }
                 sqlite3_finalize(sqlStatement);
@@ -144,7 +148,7 @@
             NSString *formattedDate = [dateFormatter stringFromDate:location.locationDtCreated];
             Location *duplicity = [self verifyIfLocationExists:location];
             if (duplicity == nil) {
-                NSString *sql = [NSString stringWithFormat:@"INSERT INTO LOCATIONS(location_name, location_lat, location_lng, location_dt_criacao, location_text, user_id) VALUES (\"%@\", %f, %f, \"%@\", \"%@\", %d)", location.locationName, location.locationLat, location.locationLng, formattedDate, location.locationText, location.userId];
+                NSString *sql = [NSString stringWithFormat:@"INSERT INTO LOCATIONS(location_name, location_lat, location_lng, location_dt_criacao, location_text, user_id, modus_id) VALUES (\"%@\", %f, %f, \"%@\", \"%@\", %d, %d)", location.locationName, location.locationLat, location.locationLng, formattedDate, location.locationText, location.userId, location.modusId];
                 sqlite3_stmt *sqlStatement;
                 char *errMsg;
                 if(sqlite3_prepare_v2(db, [sql UTF8String], -1, &sqlStatement, nil) != SQLITE_OK) {
@@ -164,6 +168,7 @@
                 duplicity.userId = location.userId;
                 duplicity.locationName = location.locationName;
                 duplicity.locationText = location.locationText;
+                duplicity.modusId = location.modusId;
                 [self updateData:duplicity completion:^(BOOL success, NSError *error) {
                     if (success) {
                         completion(true, nil);
@@ -196,7 +201,7 @@
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
             NSString *formattedDate = [dateFormatter stringFromDate:[NSDate date]];
-            NSString *sql = [NSString stringWithFormat:@"UPDATE LOCATIONS SET location_name = \"%@\", location_text = \"%@\", location_dt_modificacao = \"%@\", user_id = %d WHERE location_id = %d", location.locationName, location.locationText, formattedDate, location.userId, location.locationId];
+            NSString *sql = [NSString stringWithFormat:@"UPDATE LOCATIONS SET location_name = \"%@\", location_text = \"%@\", location_dt_modificacao = \"%@\", user_id = %d, modus_id = %d WHERE location_id = %d", location.locationName, location.locationText, formattedDate, location.userId, location.locationId, location.modusId];
                 sqlite3_stmt *sqlStatement;
             if(sqlite3_prepare_v2(db, [sql UTF8String], -1, &sqlStatement, nil) != SQLITE_OK) {
                 NSLog(@"Erro com o statement: %s", sqlite3_errmsg(db));
