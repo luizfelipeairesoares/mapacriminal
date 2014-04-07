@@ -72,17 +72,27 @@
     [self presentViewController:newUserView animated:YES completion:nil];
 }
 
+#pragma mark - text
+
 - (IBAction)dismissKeyboard:(id)sender {
     [sender resignFirstResponder];
-    if ([sender tag] == 1) {
-        [self.view setFrame:CGRectMake(self.view.frame.origin.x, (self.view.frame.origin.y+50.0), self.view.frame.size.width, self.view.frame.size.height)];
-    }
 }
 
 - (IBAction)goToNextField:(id)sender {
     [self dismissKeyboard:sender];
-    [self.view setFrame:CGRectMake(self.view.frame.origin.x, (self.view.frame.origin.y-50.0), self.view.frame.size.width, self.view.frame.size.height)];
     [txtPass becomeFirstResponder];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (textField.tag == 1) {
+        [self.view setFrame:CGRectMake(self.view.frame.origin.x, (self.view.frame.origin.y-50.0), self.view.frame.size.width, self.view.frame.size.height)];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField.tag == 1) {
+        [self.view setFrame:CGRectMake(self.view.frame.origin.x, (self.view.frame.origin.y+50.0), self.view.frame.size.width, self.view.frame.size.height)];
+    }
 }
 
 /*

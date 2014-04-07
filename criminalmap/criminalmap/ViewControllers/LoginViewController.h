@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UserOps.h"
 
-@interface LoginViewController : UIViewController {
+@interface LoginViewController : UIViewController <UITextFieldDelegate> {
     IBOutlet UITextField *txtLogin;
     IBOutlet UITextField *txtPass;
     IBOutlet UIButton *btnLogin;

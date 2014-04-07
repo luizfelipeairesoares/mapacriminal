@@ -315,6 +315,7 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                 <connections>
                                     <action selector="goToNextField:" destination="1YN-xI-Ssc" eventType="editingDidEndOnExit" id="opw-LI-O2p"/>
+                                    <outlet property="delegate" destination="1YN-xI-Ssc" id="yWS-2r-0Go"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="senha" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zff-QW-3Ey">
@@ -324,6 +325,7 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="dismissKeyboard:" destination="1YN-xI-Ssc" eventType="editingDidEndOnExit" id="fPe-bv-aFc"/>
+                                    <outlet property="delegate" destination="1YN-xI-Ssc" id="jIr-vZ-pku"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rgI-iP-SFo">
