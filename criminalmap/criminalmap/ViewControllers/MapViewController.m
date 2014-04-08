@@ -35,7 +35,21 @@
     [appDelegate.locManager setDelegate:self];
     [appDelegate.locManager startUpdatingLocation];
     
+    [self setNeedsStatusBarAppearanceUpdate];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:70/255.0 green:130.0/255.0 blue:180.0/255.0 alpha:1.]];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor]; // change this color
+    self.navigationItem.titleView = label;
+    label.text = @"Mapa";
+    [label sizeToFit];
+    
     UIBarButtonItem *refreshLocation = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(btnRefinarTouched:)];
+    [refreshLocation setTintColor:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:refreshLocation];
     
     NSTimer *updateTimer = [NSTimer timerWithTimeInterval:60 target:self selector:@selector(btnRefinarTouched:) userInfo:nil repeats:YES];
@@ -44,6 +58,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self setNeedsStatusBarAppearanceUpdate];
     if (![lblLocalAprox.text isEqualToString:@""]) {
         [btnCadastrar setHidden:FALSE];
     } else {
@@ -52,6 +67,7 @@
 }
 
 - (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
     if (self.view.bounds.size.height != 568) {
         [btnVerCadastrados setFrame:CGRectMake(btnVerCadastrados.frame.origin.x, (btnVerCadastrados.frame.origin.y - 20.0), btnVerCadastrados.frame.size.width, btnVerCadastrados.frame.size.height)];
     } else {
@@ -61,6 +77,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,6 +122,11 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PlacesViewController *places = [storyboard instantiateViewControllerWithIdentifier:@"PlacesViewController"];
     [self.navigationController pushViewController:places animated:YES];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    NSLog(@"light");
+    return UIStatusBarStyleLightContent;
 }
 
 /*
