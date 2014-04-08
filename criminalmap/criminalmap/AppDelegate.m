@@ -19,7 +19,7 @@
     self.geocoder = [[CLGeocoder alloc] init];
     
     [self checkDB];
-    
+        
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginViewController *loginView = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     [self.window setRootViewController:loginView];

@@ -41,7 +41,7 @@
                     Location *loc = [[Location alloc] init];
                     NSString *strDateAndHour = [NSString stringWithUTF8String:dateCreated];
                     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                    [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
                     NSDate *d = [dateFormatter dateFromString:strDateAndHour];
                     loc.locationDtCreated = d;
                     if (dateModified != nil) {

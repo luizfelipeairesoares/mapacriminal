@@ -19,6 +19,7 @@
 @property (strong, nonatomic) CLGeocoder *geocoder;
 @property (strong, nonatomic) NSString *dbPath;
 @property (strong, nonatomic) NSMutableArray *arrayModus;
+@property (strong, nonatomic) UINavigationController *navController;
 
 - (void)selectModus;
 

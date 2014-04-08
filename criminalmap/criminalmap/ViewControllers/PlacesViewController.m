@@ -12,6 +12,8 @@
 
 @interface PlacesViewController ()
 
+@property(strong, nonatomic) AppDelegate *appDelegate;
+
 @end
 
 @implementation PlacesViewController
@@ -31,6 +33,19 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor]; // change this color
+    self.navigationItem.titleView = label;
+    label.text = @"Locais";
+    [label sizeToFit];
+    
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     LocationOps *locOps = [[LocationOps alloc] init];
     allLocations = [locOps selectAllLocations];
     if (allLocations == nil || [allLocations count] == 0) {
@@ -43,6 +58,18 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 #pragma mark - TableView Delegate

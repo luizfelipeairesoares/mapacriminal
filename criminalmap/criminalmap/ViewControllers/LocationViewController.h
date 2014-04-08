@@ -32,6 +32,8 @@
     IBOutlet UIButton *btnModus;
     IBOutlet UILabel *lblModificacao;
     IBOutlet UITextField *txtModificacao;
+    IBOutlet UIImageView *imgObs;
+    IBOutlet UIImageView *imgImages;
     
     NSDate *selectedDate;
     BOOL pickerIsShown;

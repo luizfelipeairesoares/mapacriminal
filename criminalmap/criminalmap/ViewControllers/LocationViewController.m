@@ -16,6 +16,7 @@
 @property(assign) BOOL isModusPickerShown;
 @property(strong, nonatomic) NSMutableArray *modus;
 @property(assign) int modusId;
+@property(assign) double diff;
 @end
 
 @implementation LocationViewController
@@ -40,6 +41,20 @@
         [appDelegate selectModus];
     }
     
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor]; // change this color
+    self.navigationItem.titleView = label;
+    if (self.currentLocation == nil) {
+        label.text = @"Cadastrar Local";
+    } else {
+        label.text = @"Editar Local";
+    }
+    [label sizeToFit];
+    
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, 44)];
     toolbar.tag = 8;
     toolbar.barStyle = UIBarStyleDefault;
@@ -47,7 +62,10 @@
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissKeyboard:)];
     [toolbar setItems:[NSArray arrayWithObjects:spacer, doneButton, nil]];
     [self.txtObs setInputAccessoryView:toolbar];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -58,11 +76,15 @@
         [self.lblLatitude setText:[NSString stringWithFormat:@"%f", self.currentLocation.locationLat]];
         [self.lblLongitude setText:[NSString stringWithFormat:@"%f", self.currentLocation.locationLng]];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm"];
-        if (self.currentLocation.locationDtModified != nil) {
-            [self.txtDate setText:[dateFormatter stringFromDate:self.currentLocation.locationDtModified]];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSLog(@"%@", self.currentLocation.locationDtCreated);
+        NSString *date = [dateFormatter stringFromDate:self.currentLocation.locationDtCreated];
+        NSLog(@"%@", date);
+        [self.txtDate setText:date];
+        if (self.currentLocation.locationDtModified == nil) {
+            [txtModificacao setText:[dateFormatter stringFromDate:self.currentLocation.locationDtCreated]];
         } else {
-            [self.txtDate setText:[dateFormatter stringFromDate:self.currentLocation.locationDtCreated]];
+            [txtModificacao setText:[dateFormatter stringFromDate:self.currentLocation.locationDtModified]];
         }
         NSString *modusName = @"";
         for (int i = 0; i < [appDelegate.arrayModus count]; i++) {
@@ -80,6 +102,7 @@
         [img3 setHidden:TRUE];
         [noImages setHidden:FALSE];
         [btnAddPhoto setHidden:FALSE];
+        [lblModificacao setHidden:TRUE];
     }
 }
 
@@ -107,6 +130,9 @@
         [btnModus setFrame:CGRectMake(btnModus.frame.origin.x, (btnModus.frame.origin.y + 70.0), btnModus.frame.size.width, btnModus.frame.size.height)];
         [lblModificacao setFrame:CGRectMake(lblModificacao.frame.origin.x, (lblModificacao.frame.origin.y + 70.0), lblModificacao.frame.size.width, lblModificacao.frame.size.height)];
         [txtModificacao setFrame:CGRectMake(txtModificacao.frame.origin.x, (txtModificacao.frame.origin.y + 70.0), txtModificacao.frame.size.width, txtModificacao.frame.size.height)];
+        [imgObs setFrame:CGRectMake(imgObs.frame.origin.x, (imgObs.frame.origin.y + 70.0), imgObs.frame.size.width, imgObs.frame.size.height)];
+        [imgImages setFrame:CGRectMake(imgImages.frame.origin.x, (imgImages.frame.origin.y + 70.0), imgImages.frame.size.width, imgImages.frame.size.height)];
+        self.diff = (lblModus.frame.origin.y - lblModificacao.frame.origin.y);
     }
 }
 
@@ -247,6 +273,11 @@
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissKeyboard:)];
     [toolbar setItems:[NSArray arrayWithObjects:spacer, doneButton, nil]];
     [self.view addSubview:toolbar];
+    [self.view setFrame:CGRectMake(self.view.frame.origin.x, (self.view.frame.origin.y - 120.0), self.view.frame.size.width, self.view.frame.size.height)];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    [self.view setFrame:CGRectMake(self.view.frame.origin.x, (self.view.frame.origin.y + 120.0), self.view.frame.size.width, self.view.frame.size.height)];
 }
 
 #pragma mark - PickerView Delegate
@@ -277,6 +308,9 @@
         [noImages setHidden:TRUE];
         [btnAddPhoto setHidden:TRUE];
         pickerIsShown = TRUE;
+        [imgImages setHidden:TRUE];
+        [imgObs setHidden:TRUE];
+        [self.txtObs setHidden:TRUE];
         [UIView commitAnimations];
         if ([self.txtDate.text isEqualToString:@""]) {
             [self changeDate:datePicker];
@@ -298,6 +332,9 @@
     [noImages setHidden:FALSE];
     [btnAddPhoto setHidden:FALSE];
     pickerIsShown = FALSE;
+    [imgImages setHidden:FALSE];
+    [imgObs setHidden:FALSE];
+    [self.txtObs setHidden:FALSE	];
     [UIView commitAnimations];
 }
 

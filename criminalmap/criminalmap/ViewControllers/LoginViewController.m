@@ -55,8 +55,12 @@
         [userDefaults synchronize];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         MapViewController *mapView = [storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mapView];
-        [self.view.window setRootViewController:navController];
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        appDelegate.navController = [[UINavigationController alloc] initWithRootViewController:mapView];
+        [appDelegate.navController.navigationBar setBarTintColor:[UIColor colorWithRed:70/255.0 green:130.0/255.0 blue:180.0/255.0 alpha:1.]];
+        [appDelegate.navController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
+        [appDelegate.navController.navigationBar setTintColor:[UIColor whiteColor]];
+        [self.view.window setRootViewController:appDelegate.navController];
     } else {
         [[[UIAlertView alloc] initWithTitle:@"Mancha Criminal" message:@"Usuário não encontrado" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
     }

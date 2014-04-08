@@ -47,12 +47,12 @@
         [txtPoliciaId becomeFirstResponder];
     } else if ([sender tag] == 2) {
         [txtSenha becomeFirstResponder];
+        [self.view setFrame:CGRectMake(self.view.frame.origin.x, (self.view.frame.origin.y-90.0), self.view.frame.size.width, self.view.frame.size.height)];
     } else if ([sender tag] == 3) {
         [txtConfirmacaoSenha becomeFirstResponder];
-        [self.view setFrame:CGRectMake(self.view.frame.origin.x, (self.view.frame.origin.y-70.0), self.view.frame.size.width, self.view.frame.size.height)];
     } else {
         [sender resignFirstResponder];
-        [self.view setFrame:CGRectMake(self.view.frame.origin.x, (self.view.frame.origin.y+70.0), self.view.frame.size.width, self.view.frame.size.height)];
+        [self.view setFrame:CGRectMake(self.view.frame.origin.x, (self.view.frame.origin.y+90.0), self.view.frame.size.width, self.view.frame.size.height)];
     }
 }
 

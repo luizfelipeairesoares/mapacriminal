@@ -36,7 +36,6 @@
     [appDelegate.locManager startUpdatingLocation];
     
     [self setNeedsStatusBarAppearanceUpdate];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:70/255.0 green:130.0/255.0 blue:180.0/255.0 alpha:1.]];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];

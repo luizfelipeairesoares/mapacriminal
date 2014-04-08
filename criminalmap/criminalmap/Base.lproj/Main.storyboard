@@ -179,7 +179,7 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3D-jk-V6C">
                                 <rect key="frame" x="160" y="186" width="140" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="OriyaSangamMN" family="Oriya Sangam MN" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Obs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MyV-ca-MhF">
@@ -267,6 +267,8 @@
                         <outlet property="img1" destination="qSL-sZ-QeH" id="f1j-A2-aRO"/>
                         <outlet property="img2" destination="gcx-sU-wDc" id="Pjx-oh-pAI"/>
                         <outlet property="img3" destination="MF3-DH-74e" id="s1R-xC-6ye"/>
+                        <outlet property="imgImages" destination="yBR-2u-d1G" id="MM6-ds-ekz"/>
+                        <outlet property="imgObs" destination="G8x-ih-9hT" id="3wE-wx-rcv"/>
                         <outlet property="latitude" destination="9hq-fs-Gss" id="KdI-GQ-0ED"/>
                         <outlet property="lblLatitude" destination="cF8-1u-QAa" id="49V-BU-na8"/>
                         <outlet property="lblLongitude" destination="8IH-dx-rvt" id="yd4-k8-soH"/>
