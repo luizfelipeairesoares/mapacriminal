@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5507638E18F4BF4800168DB2 /* MMPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5507638D18F4BF4800168DB2 /* MMPickerView.m */; };
 		D638616118F4410E0078E4EA /* map-pin-algema.png in Resources */ = {isa = PBXBuildFile; fileRef = D638615D18F4410E0078E4EA /* map-pin-algema.png */; };
 		D638616218F4410E0078E4EA /* map-pin-carro.png in Resources */ = {isa = PBXBuildFile; fileRef = D638615E18F4410E0078E4EA /* map-pin-carro.png */; };
 		D638616318F4410E0078E4EA /* map-pin-fuzil.png in Resources */ = {isa = PBXBuildFile; fileRef = D638615F18F4410E0078E4EA /* map-pin-fuzil.png */; };
@@ -28,7 +29,6 @@
 		D638618418F482710078E4EA /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = D638618018F482710078E4EA /* iTunesArtwork.png */; };
 		D638618818F485020078E4EA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D638618718F485020078E4EA /* Default-568h@2x.png */; };
 		D674A2CB18EF3ACA000FD4A3 /* Modus.m in Sources */ = {isa = PBXBuildFile; fileRef = D674A2CA18EF3ACA000FD4A3 /* Modus.m */; };
-		D674A2CF18EF3D7E000FD4A3 /* MMPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D674A2CE18EF3D7E000FD4A3 /* MMPickerView.m */; };
 		D6AA8E0818D1DC08006C1F1A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA8E0718D1DC08006C1F1A /* Foundation.framework */; };
 		D6AA8E0A18D1DC08006C1F1A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA8E0918D1DC08006C1F1A /* CoreGraphics.framework */; };
 		D6AA8E0C18D1DC08006C1F1A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA8E0B18D1DC08006C1F1A /* UIKit.framework */; };
@@ -55,6 +55,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5507638C18F4BF4800168DB2 /* MMPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPickerView.h; sourceTree = "<group>"; };
+		5507638D18F4BF4800168DB2 /* MMPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPickerView.m; sourceTree = "<group>"; };
 		D638615D18F4410E0078E4EA /* map-pin-algema.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-pin-algema.png"; path = "Resources/Images/@1x/map-pin-algema.png"; sourceTree = "<group>"; };
 		D638615E18F4410E0078E4EA /* map-pin-carro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-pin-carro.png"; path = "Resources/Images/@1x/map-pin-carro.png"; sourceTree = "<group>"; };
 		D638615F18F4410E0078E4EA /* map-pin-fuzil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-pin-fuzil.png"; path = "Resources/Images/@1x/map-pin-fuzil.png"; sourceTree = "<group>"; };
@@ -77,8 +79,6 @@
 		D638618718F485020078E4EA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Images/Default-568h@2x.png"; sourceTree = "<group>"; };
 		D674A2C918EF3ACA000FD4A3 /* Modus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Modus.h; path = DBOps/Modus.h; sourceTree = "<group>"; };
 		D674A2CA18EF3ACA000FD4A3 /* Modus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Modus.m; path = DBOps/Modus.m; sourceTree = "<group>"; };
-		D674A2CD18EF3D7E000FD4A3 /* MMPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMPickerView.h; path = ../../../../libs/ios/MMPickerView/MMPickerView/MMPickerView.h; sourceTree = "<group>"; };
-		D674A2CE18EF3D7E000FD4A3 /* MMPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMPickerView.m; path = ../../../../libs/ios/MMPickerView/MMPickerView/MMPickerView.m; sourceTree = "<group>"; };
 		D6AA8E0418D1DC08006C1F1A /* criminalmap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = criminalmap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6AA8E0718D1DC08006C1F1A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D6AA8E0918D1DC08006C1F1A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -195,8 +195,8 @@
 		D674A2CC18EF3D67000FD4A3 /* MMPicker */ = {
 			isa = PBXGroup;
 			children = (
-				D674A2CD18EF3D7E000FD4A3 /* MMPickerView.h */,
-				D674A2CE18EF3D7E000FD4A3 /* MMPickerView.m */,
+				5507638C18F4BF4800168DB2 /* MMPickerView.h */,
+				5507638D18F4BF4800168DB2 /* MMPickerView.m */,
 			);
 			name = MMPicker;
 			sourceTree = "<group>";
@@ -372,6 +372,7 @@
 				LastUpgradeCheck = 0510;
 				TargetAttributes = {
 					D6AA8E0318D1DC08006C1F1A = {
+						DevelopmentTeam = ZSB67NF85W;
 						SystemCapabilities = {
 							com.apple.iOS = {
 								enabled = 1;
@@ -449,7 +450,7 @@
 				D6AA8E1418D1DC08006C1F1A /* main.m in Sources */,
 				D6E4490818D1E9BA0020D8F5 /* LocationViewController.m in Sources */,
 				D6E4490C18D246F50020D8F5 /* PlacesViewController.m in Sources */,
-				D674A2CF18EF3D7E000FD4A3 /* MMPickerView.m in Sources */,
+				5507638E18F4BF4800168DB2 /* MMPickerView.m in Sources */,
 				D6BAB80918D87C57004D79D5 /* LoginViewController.m in Sources */,
 				D6BAB80C18D889F0004D79D5 /* NewUserViewController.m in Sources */,
 				D6E4491018D249DF0020D8F5 /* PlacesCell.m in Sources */,
@@ -559,11 +560,14 @@
 		D6AA8E3718D1DC09006C1F1A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "criminalmap/criminalmap-Prefix.pch";
 				INFOPLIST_FILE = "criminalmap/criminalmap-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -571,11 +575,14 @@
 		D6AA8E3818D1DC09006C1F1A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "criminalmap/criminalmap-Prefix.pch";
 				INFOPLIST_FILE = "criminalmap/criminalmap-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

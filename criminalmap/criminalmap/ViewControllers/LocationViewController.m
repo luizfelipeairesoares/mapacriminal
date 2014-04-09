@@ -334,7 +334,7 @@
     pickerIsShown = FALSE;
     [imgImages setHidden:FALSE];
     [imgObs setHidden:FALSE];
-    [self.txtObs setHidden:FALSE	];
+    [self.txtObs setHidden:FALSE];
     [UIView commitAnimations];
 }
 
@@ -354,25 +354,36 @@
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [self dismissViewControllerAnimated:YES completion:nil];
     if ([info count] > 0) {
-        UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+        UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
         if (image != nil) {
             if (img1.image == nil) {
+                img1 = [[UIImageView alloc] init];
                 [img1 setImage:image];
                 img1Url = [info objectForKey:UIImagePickerControllerReferenceURL];
+                [img1 sizeToFit];
             } else if (img2.image == nil) {
+                img2 = [[UIImageView alloc] init];
                 [img2 setImage:image];
                 img2Url = [info objectForKey:UIImagePickerControllerReferenceURL];
+                [img2 sizeToFit];
             } else if (img3.image == nil) {
+                img3 = [[UIImageView alloc] init];
                 [img3 setImage:image];
                 img3Url = [info objectForKey:UIImagePickerControllerReferenceURL];
+                [img1 sizeToFit];
             }
         }
         if (img1.image != nil && img2.image != nil && img3.image != nil) {
             [btnAddPhoto setHidden:TRUE];
         }
     }
+    [self dismissViewControllerAnimated:YES completion:^() {
+        [img1 setHidden:FALSE];
+        [img2 setHidden:FALSE];
+        [img3 setHidden:FALSE];
+        [noImages setHidden:TRUE];
+    }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
